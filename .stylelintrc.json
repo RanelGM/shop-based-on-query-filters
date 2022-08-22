@@ -1,0 +1,17 @@
+{
+  "extends": ["stylelint-config-hudochenkov/full"],
+  "plugins": ["stylelint-order", "stylelint-scss"],
+  "overrides": [
+    {
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss"
+    }
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "no-unknown-animations": null,
+    "selector-max-type": 2,
+    "indentation": 2
+  }
+}

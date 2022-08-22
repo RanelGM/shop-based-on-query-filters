@@ -1,0 +1,23 @@
+{
+  "printWidth": 120,
+  "useTabs": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "importOrder": [
+    "^react*(.*)$",
+    "^redux*(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^.*axiosAPI.*$",
+    "^.*store.*$",
+    "^.*hooks.*$",
+    "^.*types.*$",
+    "^.*components.*$",
+    "^[./](?!.*module).*",
+    "^.*utils.*$",
+    "^.*assets.*$",
+    "^(.*?).scss$"
+  ],
+  "importOrderSeparation": false
+}
