@@ -1,0 +1,15 @@
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: "Droid Sans";
+  src: url("./droidSans.woff2") format("woff2"), url("./droidSans.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: bold;
+  font-style: normal;
+  font-family: "Droid Sans";
+  src: url("./droidSans700.woff2") format("woff2"), url("./droidSans700.woff") format("woff");
+  font-display: swap;
+}

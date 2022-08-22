@@ -1,3 +1,11 @@
+// Colors
+:root {
+  --black: #000;
+  --text-primary: var(--black);
+}
+
+// Extends
+
 %visually-hidden {
   position: absolute;
   overflow: hidden;
