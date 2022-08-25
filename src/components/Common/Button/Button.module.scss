@@ -1,0 +1,61 @@
+@import "assets/styles/utils.scss";
+
+$transition: 0.3s ease;
+
+.button {
+  @extend %button-reset;
+
+  @include invert-color(
+    var(--background-secondary),
+    var(--text-secondary),
+    var(--background-primary),
+    var(--text-primary)
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 200px;
+  max-width: fit-content;
+  min-height: 90px;
+  padding: 8px;
+  border: 2px solid var(--black);
+  font-weight: bold;
+  font-size: 16px;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: color $transition, background-color $transition;
+
+  svg {
+    transition: fill $transition;
+  }
+
+  &--red {
+    @include invert-color(var(--red), var(--text-secondary), var(--background-primary), var(--red));
+
+    border: 2px solid var(--red);
+  }
+
+  &--white-red {
+    @include invert-color(var(--background-primary), var(--red), var(--red), var(--text-secondary));
+
+    border: 2px solid var(--red);
+  }
+
+  &--white-black {
+    @include invert-color(
+      var(--background-primary),
+      var(--text-primary),
+      var(--background-secondary),
+      var(--text-secondary)
+    );
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
