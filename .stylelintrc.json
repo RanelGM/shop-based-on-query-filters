@@ -12,6 +12,7 @@
     "scss/at-rule-no-unknown": true,
     "no-unknown-animations": null,
     "selector-max-type": 2,
-    "indentation": 2
+    "indentation": 2,
+    "no-descending-specificity": null
   }
 }
