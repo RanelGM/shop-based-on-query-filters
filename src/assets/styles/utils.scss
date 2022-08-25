@@ -1,0 +1,53 @@
+// Colors
+:root {
+  --black: #000;
+  --white: #fff;
+  --red: #c90606;
+  --text-primary: var(--black);
+  --text-secondary: var(--white);
+  --background-primary: var(--white);
+  --background-secondary: var(--black);
+}
+
+// Mixins
+@mixin invert-color($backgroundColor, $color, $hoverBackgroundColor, $hoverColor) {
+  background-color: $backgroundColor;
+  color: $color;
+
+  svg {
+    fill: $color;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $hoverBackgroundColor;
+    color: $hoverColor;
+
+    svg {
+      fill: $hoverColor;
+    }
+  }
+}
+
+// Extends
+
+%visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+}
+
+%button-reset {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
