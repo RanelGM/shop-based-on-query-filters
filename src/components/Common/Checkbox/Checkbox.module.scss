@@ -1,0 +1,66 @@
+@import "assets/styles/utils.scss";
+
+$transition: 0.3s ease;
+
+.component {
+  display: flex;
+  align-items: flex-start;
+}
+
+.input {
+  @extend %visually-hidden;
+
+  &:checked + .label::before {
+    background-image: url("../../../assets/icons/checkmark.svg");
+    background-position: center;
+    background-size: 15px;
+  }
+
+  &:disabled + .label {
+    color: var(--text-disabled);
+    pointer-events: none;
+
+    &::before {
+      border-color: var(--text-disabled);
+      background-color: var(--background-disabled);
+    }
+  }
+
+  &:focus + .label {
+    color: var(--text-hover);
+
+    &::before {
+      border-color: var(--text-hover);
+    }
+  }
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+  font-size: 16px;
+  line-height: 19px;
+  cursor: pointer;
+  transition: color $transition;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    border: 1px solid var(--border-input);
+    border-radius: 4px;
+    transition: border-color $transition;
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--text-hover);
+
+    &::before {
+      border-color: var(--text-hover);
+    }
+  }
+}

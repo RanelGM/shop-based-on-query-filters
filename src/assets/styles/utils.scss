@@ -1,12 +1,23 @@
-// Colors
 :root {
+  // Colors
   --black: #000;
   --white: #fff;
   --red: #c90606;
+  --gray: #9f9e9e;
+  --gray-1: #ddd;
+  --gray-2: #f6f3f3;
+
+  // Color Variables
   --text-primary: var(--black);
   --text-secondary: var(--white);
+  --text-disabled: var(--gray-1);
+  --text-hover: var(--red);
   --background-primary: var(--white);
   --background-secondary: var(--black);
+  --background-disabled: var(--gray-2);
+  --border-input: var(--gray);
+  --border-input-hover: var(--black);
+  --border-input-focus: var(--red);
 }
 
 // Mixins
