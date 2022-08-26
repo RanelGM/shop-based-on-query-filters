@@ -6,6 +6,7 @@
   --gray: #9f9e9e;
   --gray-1: #ddd;
   --gray-2: #f6f3f3;
+  --gray-3: #545454;
 
   // Color Variables
   --text-primary: var(--black);
@@ -18,6 +19,8 @@
   --border-input: var(--gray);
   --border-input-hover: var(--black);
   --border-input-focus: var(--red);
+  --border-search-form: var(--gray-3);
+  --border-search-form-hover: var(--gray);
 }
 
 // Mixins

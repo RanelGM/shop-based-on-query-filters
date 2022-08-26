@@ -1,0 +1,66 @@
+@import "assets/styles/utils.scss";
+
+$buttonHeight: 38px;
+$transition: 0.3s ease;
+
+.component {
+  position: relative;
+}
+
+.form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  min-height: $buttonHeight;
+  padding: 5px $buttonHeight 5px 10px;
+  border: 1px solid var(--border-search-form);
+  border-radius: 4px;
+  background: inherit;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  transition: border-color $transition;
+
+  &:hover {
+    border-color: var(--border-search-form-hover);
+  }
+
+  &:focus {
+    border-color: var(--border-search-form-hover);
+    outline-style: solid;
+    outline-color: var(--border-search-form-hover);
+  }
+
+  &:disabled {
+    border-color: var(--text-disabled);
+    background-color: var(--background-disabled);
+    pointer-events: none;
+  }
+}
+
+.buttonSearch {
+  @extend %button-reset;
+
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $buttonHeight;
+  height: $buttonHeight;
+}
+
+.iconSearch {
+  width: 14px;
+  height: 14px;
+  fill: var(--border-search-form-hover);
+  transition: fill $transition;
+
+  .form:hover &,
+  .form:focus-within & {
+    fill: var(--text-secondary);
+  }
+}
