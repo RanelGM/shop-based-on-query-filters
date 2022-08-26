@@ -1,0 +1,83 @@
+@import "assets/styles/utils.scss";
+
+$transition: 0.3s ease;
+
+.component {
+  padding: 20px 0;
+  background-color: var(--background-secondary);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 100px;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.navList {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  align-items: center;
+  max-width: 400px;
+  margin: 0;
+  column-gap: 40px;
+}
+
+.navLink {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: color $transition;
+
+  &:hover,
+  &:focus {
+    color: var(--text-hover);
+    outline: none;
+  }
+}
+
+.searchForm {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.cart {
+  @include expand-space(40px, 40px);
+
+  position: relative;
+
+  svg {
+    fill: var(--text-secondary);
+    transition: fill $transition;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: var(--text-hover);
+  }
+}
+
+.cartCount {
+  position: absolute;
+  top: -5px;
+  left: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 12px;
+  min-height: 12px;
+  padding: 0 2px;
+  border-radius: 100px;
+  background-color: var(--red);
+  color: var(--text-secondary);
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: none;
+}

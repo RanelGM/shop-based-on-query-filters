@@ -14,6 +14,7 @@ $transition: 0.3s ease;
 }
 
 .input {
+  width: 100%;
   min-height: $buttonHeight;
   padding: 5px $buttonHeight 5px 10px;
   border: 1px solid var(--border-search-form);
