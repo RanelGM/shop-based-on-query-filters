@@ -21,6 +21,14 @@
   --border-input-focus: var(--red);
   --border-search-form: var(--gray-3);
   --border-search-form-hover: var(--gray);
+  --overlay-primary: rgb(0 0 0 / 0.3);
+
+  // Propery Variables
+  --padding-desktop-width: 40px;
+  --padding-tablet-width: 30px;
+  --padding-mobile-width: 20px;
+  --padding-desktop-header-height: 20px;
+  --padding-mobile-header-height: 15.5px;
 }
 
 // Mixins
@@ -54,6 +62,18 @@
     width: $width;
     height: $height;
     transform: translate(-50%, -50%);
+  }
+}
+
+@mixin viewport-1023 {
+  @media screen and (max-width: (1024 - 1px)) {
+    @content;
+  }
+}
+
+@mixin viewport-767 {
+  @media screen and (max-width: (768 - 1px)) {
+    @content;
   }
 }
 

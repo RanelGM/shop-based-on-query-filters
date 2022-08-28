@@ -1,0 +1,19 @@
+$color: var(--black);
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: var(--overlay-primary);
+  cursor: pointer;
+
+  & > * {
+    cursor: initial;
+  }
+}
+
+.lock {
+  overflow: hidden;
+}
