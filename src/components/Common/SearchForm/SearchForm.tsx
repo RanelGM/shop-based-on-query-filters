@@ -22,7 +22,11 @@ export const SearchForm = (props: SearchFormProps) => {
     <div className={cn(style.component, className)}>
       <form className={style.form} onSubmit={onFormSubmit}>
         <input className={style.input} {...rest} />
-        <button className={style.buttonSearch} type="submit" tabIndex={-1}>
+        <button
+          className={style.buttonSearch}
+          type={onFormSubmit ? "submit" : "button"}
+          tabIndex={onFormSubmit ? 0 : -1}
+        >
           <Icon className={style.iconSearch} iconName="search" />
         </button>
       </form>

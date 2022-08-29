@@ -1,7 +1,21 @@
+@import "assets/styles/utils.scss";
+
 .component {
   display: flex;
   align-items: center;
-  max-width: 1020px;
+  max-width: 1024px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 var(--padding-desktop-width);
+}
+
+@include viewport-1023 {
+  .component {
+    padding: 0 var(--padding-tablet-width);
+  }
+}
+
+@include viewport-767 {
+  .component {
+    padding: 0 var(--padding-mobile-width);
+  }
 }

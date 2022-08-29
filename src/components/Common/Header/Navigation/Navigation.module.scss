@@ -1,0 +1,173 @@
+@import "assets/styles/utils.scss";
+
+.component {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.navList {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  align-items: center;
+  max-width: 400px;
+  margin: 0;
+  column-gap: 40px;
+}
+
+.navLink {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    color: var(--text-hover);
+    outline: none;
+  }
+}
+
+.navButton {
+  @extend %button-reset;
+
+  z-index: 2;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+
+  & > div {
+    width: 14px;
+  }
+}
+
+.navButtonIcon {
+  position: relative;
+  width: 10px;
+
+  &,
+  &::before,
+  &::after {
+    display: block;
+    height: 1px;
+    border-radius: 1px;
+    background-color: var(--border-search-form-hover);
+    transition: background-color 0.2s 0.2s, transform 0.3s, top 0.3s 0.3s;
+  }
+
+  .navButton:hover &,
+  .navButton:focus &,
+  .navButton:hover &::before,
+  .navButton:hover &::after,
+  .navButton:focus &::before,
+  .navButton:focus &::after {
+    background-color: var(--text-secondary);
+  }
+
+  .component--open .navButton:hover &,
+  .component--open .navButton:focus & {
+    background-color: transparent;
+  }
+
+  .component--open .navButton:hover &::before,
+  .component--open .navButton:hover &::after,
+  .component--open .navButton:focus &::before,
+  .component--open .navButton:focus &::after {
+    background-color: var(--text-primary);
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 1px;
+  }
+
+  &::before {
+    top: -4px;
+  }
+
+  &::after {
+    top: 4px;
+  }
+
+  .component--open & {
+    background-color: transparent;
+
+    &::before,
+    &::after {
+      top: 0;
+      background-color: var(--text-primary);
+      transition: background-color 0.3s, top 0.3s, transform 0.3s 0.3s;
+    }
+
+    &::before {
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+@include viewport-1023 {
+  .navList {
+    column-gap: 15px;
+  }
+}
+
+@include viewport-767 {
+  .navButton {
+    display: flex;
+  }
+
+  .navigation {
+    position: absolute;
+    // Отклонение top (padding-top у Header), left (padding mobile у Positioner), padding-top (кастомный)
+    // требуется т.к. navButton сохраняет своё положение, не рендерится заново
+    top: calc(var(--padding-mobile-header-height) * -1);
+    left: calc(var(--padding-mobile-width) * -1);
+    z-index: 1;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 45px;
+    background-color: var(--background-primary);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    .component--open & {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .navList {
+    flex-grow: 1;
+    flex-direction: column;
+    row-gap: 0;
+    align-items: stretch;
+    max-width: none;
+  }
+
+  .navItem {
+    display: flex;
+  }
+
+  .navLink {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0;
+    color: var(--text-primary);
+  }
+}

@@ -1,0 +1,40 @@
+@import "assets/styles/utils.scss";
+
+.overlay {
+  z-index: 2;
+  background-color: var(--background-primary);
+}
+
+.component {
+  display: flex;
+  align-items: center;
+  padding: var(--padding-mobile-header-height) 25px var(--padding-mobile-header-height) 50px;
+  background-color: var(--background-secondary);
+}
+
+.searchForm {
+  flex-grow: 1;
+  margin-right: 12px;
+
+  input {
+    min-height: auto;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+.buttonIcon {
+  @extend %button-reset;
+
+  @include expand-space(40px, 40px);
+
+  svg {
+    fill: var(--border-search-form-hover);
+    transition: fill 0.3s ease;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: var(--text-secondary);
+  }
+}

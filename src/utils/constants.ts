@@ -6,6 +6,11 @@ export enum AppRoute {
   About = "/about",
 }
 
+export enum ViewPortMaxWidth {
+  Mobile = 767,
+  Tablet = 1023,
+}
+
 export const HEADER_NAV_LINKS = [
   { id: "1", name: "Каталог", path: AppRoute.Catalog },
   { id: "2", name: "Наши магазины", path: AppRoute.Shops },

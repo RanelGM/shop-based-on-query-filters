@@ -45,13 +45,13 @@ $transition: 0.3s ease;
 .buttonSearch {
   @extend %button-reset;
 
+  @include expand-space($buttonHeight, $buttonHeight);
+
   position: absolute;
-  right: 0;
+  right: 13px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: $buttonHeight;
-  height: $buttonHeight;
 }
 
 .iconSearch {
