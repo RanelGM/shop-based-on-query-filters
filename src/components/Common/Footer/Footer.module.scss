@@ -1,0 +1,86 @@
+@import "assets/styles/utils.scss";
+
+.footer {
+  margin-top: 10px;
+  padding: 20px 0;
+  background-color: var(--background-secondary);
+}
+
+.positioner {
+  display: flex;
+  align-items: center;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  margin-left: 125px;
+  column-gap: 20px;
+}
+
+.info {
+  h2 {
+    margin: 0 0 10px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+  }
+
+  p,
+  a {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 10px;
+    line-height: 14px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover,
+  a:focus {
+    color: var(--text-hover);
+  }
+
+  &--about {
+    max-width: 200px;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+  margin: 0;
+
+  &--contacts {
+    flex-direction: row;
+    column-gap: 20px;
+  }
+}
+
+.navItem {
+  line-height: 14px;
+}
+
+.contactLink {
+  @include expand-space(40px, 40px);
+
+  svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--text-secondary);
+    transition: fill 0.3s ease;
+  }
+
+  &:hover svg,
+  &:focus svg {
+    fill: var(--text-hover);
+  }
+}
