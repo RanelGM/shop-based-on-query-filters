@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useModal from "hooks/useModal";
 import { useViewport } from "hooks/useViewport";
@@ -15,7 +14,7 @@ export const Header = () => {
   const { isMobileViewport } = useViewport();
 
   // На мобильных устройства рендерится иконка поиска, при клике на которую появляется модальное окно поиска
-  const [isModalOpen, modalCallbacks] = useModal({ isOverflowHidden: true });
+  const [isModalOpen, modalCallbacks] = useModal({});
 
   const onSearchButtonClick = () => {
     modalCallbacks.openModal();
