@@ -1,32 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useModal from "hooks/useModal";
+import { useViewport } from "hooks/useViewport";
 import { SearchFormModal } from "components/Modals/SearchFormModal/SearchFormModal";
 import { Icon } from "../Icon/Icon";
 import { Positioner } from "../Positioner/Positioner";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { Navigation } from "./Navigation/Navigation";
 import { AppRoute } from "utils/constants";
-import { checkIsMobileViewport } from "utils/utils";
 import logo from "assets/img/content/logo.svg";
 import style from "./Header.module.scss";
 
 export const Header = () => {
-  const [isMobileViewport, setIsMobileViewport] = useState<boolean>(checkIsMobileViewport());
-
-  useEffect(() => {
-    // Определяет текущей viewport и устанавливает isMobileViewport = true, если подходит под мобильный
-    // В зависимости от этого, по разному рендерит кнопку поиска / компонент SearchForm
-    const updateViewport = () => {
-      setIsMobileViewport(checkIsMobileViewport());
-    };
-
-    window.addEventListener("resize", updateViewport);
-    return () => window.removeEventListener("resize", updateViewport);
-  }, []);
+  const { isMobileViewport } = useViewport();
 
   // На мобильных устройства рендерится иконка поиска, при клике на которую появляется модальное окно поиска
-  const [isModalOpen, modalCallbacks] = useModal({});
+  const [isModalOpen, modalCallbacks] = useModal({ isOverflowHidden: true });
 
   const onSearchButtonClick = () => {
     modalCallbacks.openModal();

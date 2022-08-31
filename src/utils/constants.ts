@@ -6,7 +6,13 @@ export enum AppRoute {
   About = "/about",
 }
 
-export enum ViewPortMaxWidth {
+export enum Viewport {
+  Mobile = "Mobile",
+  Tablet = "Tablet",
+  Desktop = "Desktop",
+}
+
+export enum ViewportMaxWidth {
   Mobile = 767,
   Tablet = 1023,
 }
