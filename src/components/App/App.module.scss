@@ -1,3 +1,5 @@
+@import "assets/styles/utils.scss";
+
 .component {
   display: flex;
   flex-direction: column;
@@ -5,5 +7,46 @@
 }
 
 .main {
+  position: relative;
   flex-grow: 1;
+  padding: 215px 0 140px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+  }
+
+  &::before {
+    top: 0;
+    height: 251px;
+    background-image: url("../../assets/img/content/bgGuitar.png"), url("../../assets/img/content/lineHeader.svg");
+    background-position: top -38px right, top 24px center;
+    background-size: 825px, 1020px;
+    background-repeat: no-repeat, repeat-x;
+  }
+
+  &::after {
+    bottom: 0;
+    height: 140px;
+    background-image: url("../../assets/img/content/bgGuitar.png"), url("../../assets/img/content/lineFooter.svg");
+    background-position: bottom 50px left 100%, bottom 129px center;
+    background-size: 825px, 1020px;
+    background-repeat: no-repeat, repeat-x;
+    transform: rotate(180deg);
+  }
+}
+
+@include retina {
+  .main {
+    &::before {
+      background-image: url("../../assets/img/content/bgGuitar@2x.png"), url("../../assets/img/content/lineHeader.svg");
+    }
+
+    &::after {
+      background-image: url("../../assets/img/content/bgGuitar@2x.png"), url("../../assets/img/content/lineFooter.svg");
+    }
+  }
 }
