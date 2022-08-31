@@ -4,6 +4,7 @@ type ModalProps = {
   componentRef?: React.MutableRefObject<HTMLElement | null>;
   isClickCapture?: boolean;
   isKeydownCapture?: boolean;
+  isOverflowHidden?: boolean;
 };
 
 type ModalCallback = {
@@ -15,7 +16,7 @@ type ModalCallback = {
 type ModalResult = [boolean, ModalCallback];
 
 export const useModal = (props: ModalProps): ModalResult => {
-  const { componentRef, isClickCapture, isKeydownCapture } = props;
+  const { componentRef, isClickCapture, isKeydownCapture, isOverflowHidden } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onOutsideClick = (evt: MouseEvent) => {
@@ -56,7 +57,7 @@ export const useModal = (props: ModalProps): ModalResult => {
         document.removeEventListener("keydown", onEscKeydown, { capture: isKeydownCapture });
       };
     }
-  });
+  }, [isKeydownCapture, isModalOpen, onEscKeydown]);
 
   // Добавляет закрытие модального окна / селекта по клику за пределы блока (если предоставлен componentRef)
   useEffect(() => {
@@ -66,7 +67,7 @@ export const useModal = (props: ModalProps): ModalResult => {
         document.removeEventListener("click", onOutsideClick, { capture: isClickCapture });
       };
     }
-  });
+  }, [componentRef, isClickCapture, isModalOpen, onOutsideClick]);
 
   return useMemo(() => {
     const toggleModal = () => setIsModalOpen((prevState) => !prevState);
