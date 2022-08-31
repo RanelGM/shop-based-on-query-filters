@@ -33,7 +33,7 @@ export const Header = () => {
       {isModalOpen && <SearchFormModal onModalClose={modalCallbacks.closeModal} />}
 
       <header className={style.component}>
-        <Positioner>
+        <Positioner className={style.positioner}>
           <Link className={style.logo} to={"/"}>
             <img src={logo} width="70" height="70" alt="Логотип" />
           </Link>

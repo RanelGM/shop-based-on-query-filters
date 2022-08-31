@@ -5,6 +5,11 @@
   background-color: var(--background-secondary);
 }
 
+.positioner {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
   display: flex;
   justify-content: center;
