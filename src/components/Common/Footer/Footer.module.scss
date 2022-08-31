@@ -1,6 +1,6 @@
 @import "assets/styles/utils.scss";
 
-.footer {
+.component {
   margin-top: 10px;
   padding: 20px 0;
   background-color: var(--background-secondary);
@@ -23,6 +23,7 @@
   h2 {
     margin: 0 0 10px;
     color: var(--text-secondary);
+    font-weight: 400;
     font-size: 14px;
     letter-spacing: 0.05em;
   }
@@ -58,15 +59,13 @@
   flex-direction: column;
   row-gap: 5px;
   margin: 0;
+  padding: 0;
+  list-style: none;
 
   &--contacts {
     flex-direction: row;
     column-gap: 20px;
   }
-}
-
-.navItem {
-  line-height: 14px;
 }
 
 .contactLink {
@@ -82,5 +81,63 @@
   &:hover svg,
   &:focus svg {
     fill: var(--text-hover);
+  }
+}
+
+@include viewport-767 {
+  .component {
+    padding: 20px 0 45px;
+  }
+
+  .positioner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .infoWrapper {
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0 0;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+      display: none;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    &--about {
+      max-width: 260px;
+      margin-bottom: 15px;
+
+      h2 {
+        display: block;
+      }
+    }
+
+    &--links {
+      margin-bottom: 30px;
+    }
+  }
+
+  .list {
+    align-items: center;
+
+    &--links {
+      row-gap: 10px;
+    }
+  }
+
+  .navItem a {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.05em;
   }
 }

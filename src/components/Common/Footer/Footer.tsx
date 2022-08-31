@@ -9,7 +9,7 @@ import style from "./Footer.module.scss";
 
 export const Footer = () => {
   return (
-    <footer className={style.footer}>
+    <footer className={style.component}>
       <Positioner className={style.positioner}>
         <Link className={style.logo} to={"/"}>
           <img src={logo} width="70" height="70" alt="Логотип" />
@@ -23,10 +23,10 @@ export const Footer = () => {
               <p>Все инструменты проверены, отстроены и доведены до идеала!</p>
             </div>
           </div>
-          <div className={style.info}>
+          <div className={cn(style.info, style["info--links"])}>
             <h2>Полезные ссылки</h2>
             <nav>
-              <ul className={style.list}>
+              <ul className={cn(style.list, style["list--links"])}>
                 {FOOTER_NAV_LINKS.map((link) => (
                   <li className={style.navItem} key={link.id}>
                     <NavLink className={style.navLink} to={link.path}>
@@ -37,7 +37,7 @@ export const Footer = () => {
               </ul>
             </nav>
           </div>
-          <div className={style.info}>
+          <div className={cn(style.info, style["info--contacts"])}>
             <h2>Контакты автора</h2>
             <nav>
               <ul className={cn(style.list, style["list--contacts"])}>
