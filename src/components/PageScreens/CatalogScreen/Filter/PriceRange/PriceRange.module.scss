@@ -1,0 +1,20 @@
+.inputsWrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 1px;
+    background-color: var(--gray-5);
+    transform: translate3d(-50%, -50%, 0);
+  }
+}
+
+.inputWrapper {
+  max-width: 84px;
+}

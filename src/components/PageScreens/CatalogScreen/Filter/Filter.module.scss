@@ -1,0 +1,30 @@
+.component {
+  max-width: 210px;
+}
+
+.heading {
+  margin: 0 0 30px;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.filterWrapper {
+  padding: 30px 0;
+  border-top: 1px solid var(--gray-4);
+}
+
+.legend {
+  margin: 0 0 24px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
