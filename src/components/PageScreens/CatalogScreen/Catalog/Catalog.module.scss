@@ -1,0 +1,15 @@
+.component {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  row-gap: 30px;
+  padding-top: 4px;
+}
+
+.guitarsList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+}

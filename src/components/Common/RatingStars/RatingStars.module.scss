@@ -1,0 +1,15 @@
+.component {
+  display: flex;
+  align-items: center;
+  column-gap: 3px;
+}
+
+.icon {
+  fill: var(--red);
+}
+
+.comment {
+  color: var(--gray);
+  font-size: 10px;
+  line-height: 12px;
+}

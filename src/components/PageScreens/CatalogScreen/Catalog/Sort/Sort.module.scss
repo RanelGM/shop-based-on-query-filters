@@ -1,0 +1,73 @@
+@import "assets/styles/utils.scss";
+
+.component {
+  display: flex;
+  align-items: center;
+}
+
+.heading {
+  margin: 0 20px 0 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.05em;
+}
+
+.buttonIconWrapper {
+  display: flex;
+  margin-left: auto;
+  column-gap: 15px;
+}
+
+.buttonText,
+.buttonIcon {
+  @extend %button-reset;
+}
+
+.buttonText {
+  margin-right: 35px;
+  color: var(--gray-5);
+  font-size: 16px;
+  line-height: 20px;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    color: var(--text-hover);
+  }
+
+  &--active {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+}
+
+.buttonIcon {
+  @include expand-space(35px, 35px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 22px;
+  height: 22px;
+
+  &--down {
+    transform: rotate(180deg);
+  }
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease, fill 0.3s ease;
+
+  .buttonIcon:hover &:not(&--active),
+  .buttonIcon:focus &:not(&--active) {
+    opacity: 0.7;
+  }
+
+  &--active {
+    opacity: 1;
+  }
+}
