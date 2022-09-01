@@ -64,13 +64,13 @@
   }
 }
 
-@mixin viewport-1023 {
+@mixin viewport-tablet {
   @media screen and (max-width: (1024 - 1px)) {
     @content;
   }
 }
 
-@mixin viewport-767 {
+@mixin viewport-mobile {
   @media screen and (max-width: (768 - 1px)) {
     @content;
   }

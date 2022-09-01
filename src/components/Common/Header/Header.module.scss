@@ -88,13 +88,13 @@
   text-transform: none;
 }
 
-@include viewport-1023 {
+@include viewport-tablet {
   .logo {
     margin-right: 30px;
   }
 }
 
-@include viewport-767 {
+@include viewport-mobile {
   .component {
     padding: var(--padding-mobile-header-height) 0;
   }

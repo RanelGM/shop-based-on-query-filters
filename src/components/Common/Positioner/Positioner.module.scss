@@ -6,13 +6,13 @@
   padding: 0 40px;
 }
 
-@include viewport-1023 {
+@include viewport-tablet {
   .component {
     padding: 0 30px;
   }
 }
 
-@include viewport-767 {
+@include viewport-mobile {
   .component {
     padding: 0 20px;
   }

@@ -118,13 +118,13 @@
   }
 }
 
-@include viewport-1023 {
+@include viewport-tablet {
   .navList {
     column-gap: 15px;
   }
 }
 
-@include viewport-767 {
+@include viewport-mobile {
   .navButton {
     display: flex;
   }
