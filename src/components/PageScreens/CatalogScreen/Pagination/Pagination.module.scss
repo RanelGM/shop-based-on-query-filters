@@ -1,0 +1,46 @@
+.component {
+  margin-right: 7px;
+}
+
+.list {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  column-gap: 10px;
+}
+
+.buttonLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 3px;
+  border-width: 1px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.05em;
+
+  &--active {
+    background-color: var(--background-secondary);
+    color: var(--text-secondary);
+    pointer-events: none;
+  }
+
+  &--prev,
+  &--next {
+    min-width: 80px;
+  }
+
+  &--prev {
+    margin-right: 4px;
+  }
+
+  &--next {
+    margin-left: 4px;
+  }
+}

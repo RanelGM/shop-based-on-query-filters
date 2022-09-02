@@ -1,3 +1,4 @@
+import { Pagination } from "../Pagination/Pagination";
 import { GuitarCard } from "./GuitarCard/GuitarCard";
 import { Sort } from "./Sort/Sort";
 import style from "./Catalog.module.scss";
@@ -15,6 +16,7 @@ export const Catalog = () => {
           </li>
         ))}
       </ul>
+      <Pagination />
     </section>
   );
 };
