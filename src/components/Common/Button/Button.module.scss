@@ -52,6 +52,42 @@ $transition: 0.3s ease;
   }
 }
 
+.buttonClose {
+  @extend %button-reset;
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 1.5px;
+    background-color: var(--background-secondary);
+  }
+
+  &::before {
+    transform: rotate(-45deg);
+  }
+
+  &::after {
+    transform: rotate(45deg);
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
 .iconWrapper {
   display: flex;
   justify-content: center;

@@ -1,6 +1,4 @@
-.component {
-  margin-right: 7px;
-}
+@import "assets/styles/utils.scss";
 
 .list {
   display: flex;
@@ -42,5 +40,11 @@
 
   &--next {
     margin-left: 4px;
+  }
+}
+
+@include viewport-mobile {
+  .list {
+    justify-content: center;
   }
 }

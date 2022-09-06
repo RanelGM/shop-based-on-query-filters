@@ -1,3 +1,5 @@
+@import "assets/styles/utils.scss";
+
 .component {
   max-width: 210px;
 }
@@ -27,4 +29,16 @@
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+@include viewport-tablet {
+  .component {
+    max-width: initial;
+  }
+}
+
+@include viewport-mobile {
+  .heading {
+    margin: 15px 0 30px;
+  }
 }

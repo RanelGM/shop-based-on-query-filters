@@ -50,3 +50,21 @@
     }
   }
 }
+
+@include viewport-mobile {
+  .main {
+    padding: 100px 0 90px;
+
+    &::before {
+      height: 100px;
+      background-position: top -20px right -45px, top 5px center;
+      background-size: 315px, 410px;
+    }
+
+    &::after {
+      height: 90px;
+      background-position: bottom 55px left 100%, bottom 85px center;
+      background-size: 315px, 410px;
+    }
+  }
+}

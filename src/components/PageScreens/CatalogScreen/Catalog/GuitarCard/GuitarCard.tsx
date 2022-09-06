@@ -16,19 +16,22 @@ export const GuitarCard = () => {
         alt="Гитара"
         src={require("../../../../../assets/img/content/guitar1.jpg")}
       />
-      <RatingStars rating={mockRating} commentCount={5} />
-      <div className={style.info}>
-        <p className={style.infoTitle}>Честер Bass</p>
-        <p className={style.infoPrice}>17 500 ₽</p>
-      </div>
 
-      <div className={style.buttonsWrapper}>
-        <ButtonLink className={style.button} to={"#"}>
-          Подробнее
-        </ButtonLink>
-        <Button className={style.button} color="red" icon={<Icon iconName="cartAlt" />}>
-          Купить
-        </Button>
+      <div className={style.infoWrapper}>
+        <RatingStars rating={mockRating} commentCount={5} />
+        <div className={style.info}>
+          <p className={style.infoTitle}>Честер Bass</p>
+          <p className={style.infoPrice}>17 500 ₽</p>
+        </div>
+
+        <div className={style.buttonsWrapper}>
+          <ButtonLink className={style.button} to={"#"}>
+            Подробнее
+          </ButtonLink>
+          <Button className={style.button} color="red" icon={<Icon iconName="cartAlt" />}>
+            Купить
+          </Button>
+        </div>
       </div>
     </div>
   );

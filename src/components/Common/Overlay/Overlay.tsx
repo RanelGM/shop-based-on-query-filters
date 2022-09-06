@@ -6,11 +6,12 @@ import style from "./Overlay.module.scss";
 type OverlayProps = {
   children?: ReactNode;
   autoFocus?: boolean;
+  scrollLock?: boolean;
   className?: string;
 };
 
 export const Overlay = (props: OverlayProps) => {
-  const { children, autoFocus = false, className } = props;
+  const { children, autoFocus = false, scrollLock = true, className } = props;
 
   const containerRef = useRef(document.createElement("div"));
   containerRef.current.classList.add(style.overlay);
@@ -19,6 +20,7 @@ export const Overlay = (props: OverlayProps) => {
     containerRef.current.classList.add(className);
   }
 
+  // Создание контейнера
   useEffect(() => {
     const addContainer = () => {
       document.body.appendChild(containerRef.current);
@@ -33,6 +35,16 @@ export const Overlay = (props: OverlayProps) => {
     addContainer();
     return () => removeContainer();
   }, [containerRef]);
+
+  // Добавляет scrollLock на body, по умолчанию - всегда, если не передано обратное
+  useEffect(() => {
+    if (scrollLock) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }
+  }, [scrollLock]);
 
   // В случае, если в компонент Overlay передать children - они будут обернуты как с оверлеем, так и с FocusLock
   // В случае, если в компонент ничего не передавать - будет только оверлей

@@ -9,6 +9,7 @@ import { checkViewport } from "utils/utils";
 export const useViewport = () => {
   // Используется для проверки текущего вьюпорта и установления в store актуального значения
   // Возвращает объектом булевые значения текущего вьюпорта
+  // Можно использовать и не на верхнем уровне App (внутри компонентов), resize происходит 1 раз
   const currentViewport = useSelector(getCurrentViewport);
   const dispatch = useDispatch();
 

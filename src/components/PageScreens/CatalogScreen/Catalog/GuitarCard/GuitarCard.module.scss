@@ -1,3 +1,5 @@
+@import "assets/styles/utils.scss";
+
 .component {
   width: 220px;
   padding: 16px 14px;
@@ -31,6 +33,7 @@
 
 .infoPrice {
   width: 38%;
+  text-align: right;
 }
 
 .buttonsWrapper {
@@ -45,4 +48,46 @@
   padding: 2px 4px;
   font-size: 12px;
   line-height: 15px;
+}
+
+@include viewport-mobile {
+  .component {
+    display: flex;
+    justify-content: space-around;
+    width: 251px;
+    width: 100%;
+    padding: 20px 30px;
+  }
+
+  .image {
+    object-fit: cover;
+    width: 55px;
+    height: 155px;
+    margin: 0 30px 0 0;
+  }
+
+  .info {
+    flex-direction: column;
+    row-gap: 10px;
+    margin: 10px 0 35px;
+  }
+
+  .infoTitle,
+  .infoPrice {
+    width: 100%;
+  }
+
+  .infoPrice {
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .buttonsWrapper {
+    flex-direction: column;
+    row-gap: 8px;
+  }
+
+  .button {
+    min-width: 100px;
+  }
 }

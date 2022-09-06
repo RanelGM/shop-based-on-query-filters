@@ -12,7 +12,8 @@ type IconName =
   | "mail"
   | "triangle"
   | "star"
-  | "starEmpty";
+  | "starEmpty"
+  | "filter";
 
 type IconProps = SVGAttributes<HTMLOrSVGElement> & {
   iconName: IconName;
@@ -83,6 +84,17 @@ export const Icon = ({ iconName, className, ...rest }: IconProps) => {
       return (
         <svg className={cn(style.icon, className)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 12" {...rest}>
           <path d="m11.481 4.148-2.83-.39-1.264-2.431c-.226-.433-.883-.439-1.111 0L5.01 3.757l-2.83.391c-.507.07-.71.663-.342 1.003l2.047 1.89-.484 2.671c-.087.483.45.845.898.62L6.831 9.07l2.531 1.261c.45.224.986-.136.899-.618l-.484-2.671 2.047-1.891c.368-.34.164-.933-.343-1.003ZM8.78 6.733l.459 2.54L6.83 8.076 4.424 9.274l.46-2.54-1.949-1.8 2.692-.37L6.83 2.25l1.205 2.313 2.692.371-1.948 1.8Z" />
+        </svg>
+      );
+    case "filter":
+      return (
+        <svg className={cn(style.icon, className)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" {...rest}>
+          <path
+            d="M1.75 2.333a.583.583 0 0 1 .583-.583h9.334a.583.583 0 0 1 .583.583v1.509a.583.583 0 0 1-.17.412L8.337 7.996a.583.583 0 0 0-.171.412v1.509L5.833 12.25V8.408a.583.583 0 0 0-.17-.412L1.92 4.254a.583.583 0 0 1-.171-.412V2.333Z"
+            strokeWidth="1.333"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       );
     default:

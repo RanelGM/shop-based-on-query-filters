@@ -1,3 +1,5 @@
+@import "assets/styles/utils.scss";
+
 .component {
   display: flex;
   flex-grow: 1;
@@ -6,11 +8,50 @@
   padding-top: 4px;
 }
 
+.filtersWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.filterButton {
+  min-width: 220px;
+  margin-right: auto;
+}
+
 .guitarsList {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  justify-items: center;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+@include viewport-mobile {
+  .component {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .filtersWrapper {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  .filterButton {
+    width: 100%;
+    max-width: none;
+  }
+
+  .guitarsList {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: initial;
+  }
+}
+
+@media (max-width: 561px) {
+  .guitarsList {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

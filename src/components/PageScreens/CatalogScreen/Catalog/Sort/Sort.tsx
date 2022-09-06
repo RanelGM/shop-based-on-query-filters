@@ -6,20 +6,22 @@ export const Sort = () => {
   return (
     <div className={style.component}>
       <h2 className={style.heading}>Сортировать:</h2>
-      <div>
-        <button className={style.buttonText} type="button">
-          по цене
+      <div className={style.buttonsWrapper}>
+        <button className={cn(style.button, style["button--type"])} type="button">
+          <span className={style.buttonText}>по цене</span>
         </button>
-        <button className={style.buttonText} type="button">
-          по популярности
+        <button className={cn(style.button, style["button--type"])} type="button">
+          <span className={style.buttonText}>по популярности</span>
         </button>
       </div>
-      <div className={style.buttonIconWrapper}>
-        <button className={style.buttonIcon} type="button">
+      <div className={cn(style.buttonsWrapper, style["buttonsWrapper--order"])}>
+        <button className={cn(style.button, style["button--order"])} type="button">
+          <span className={style.buttonText}>по возрастанию</span>
           <Icon className={style.icon} iconName="triangle" />
         </button>
-        <button className={cn(style.buttonIcon, style["buttonIcon--down"])} type="button">
-          <Icon className={style.icon} iconName="triangle" />
+        <button className={cn(style.button, style["button--order"])} type="button">
+          <span className={style.buttonText}>по убыванию</span>
+          <Icon className={cn(style.icon, style["icon--down"])} iconName="triangle" />
         </button>
       </div>
     </div>
