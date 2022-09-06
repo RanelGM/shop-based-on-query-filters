@@ -2,6 +2,11 @@
 
 .component {
   display: flex;
+  column-gap: 30px;
+}
+
+.catalogWrapper {
+  display: flex;
   flex-grow: 1;
   flex-direction: column;
   row-gap: 30px;
@@ -29,7 +34,7 @@
 }
 
 @include viewport-mobile {
-  .component {
+  .catalogWrapper {
     justify-content: space-between;
     width: 100%;
   }
