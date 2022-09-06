@@ -29,10 +29,10 @@ export const useViewport = () => {
   }, [currentViewport, dispatch]);
 
   return useMemo(() => {
-    const isMobileViewport = currentViewport === Viewport.Mobile;
-    const isTabletViewport = currentViewport === Viewport.Tablet;
-    const isDesktopViewport = currentViewport === Viewport.Desktop;
+    const isMobileVp = currentViewport === Viewport.Mobile;
+    const isTabletVp = currentViewport === Viewport.Tablet;
+    const isDesktopVp = currentViewport === Viewport.Desktop;
 
-    return { isMobileViewport, isTabletViewport, isDesktopViewport };
+    return { isMobileVp, isTabletVp, isDesktopVp };
   }, [currentViewport]);
 };

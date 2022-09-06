@@ -7,7 +7,7 @@ import { HEADER_NAV_LINKS } from "utils/constants";
 import style from "./Navigation.module.scss";
 
 export const Navigation = () => {
-  const { isMobileViewport } = useViewport();
+  const { isMobileVp } = useViewport();
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const onNavMenuToggle = () => setIsNavMenuOpen((prevState) => !prevState);
 
@@ -16,10 +16,10 @@ export const Navigation = () => {
 
   useEffect(() => {
     // Сбрасывает открытое окно навигации в случае, если это не мобильный вьюпорт
-    if (!isMobileViewport && isNavMenuOpen) {
+    if (!isMobileVp && isNavMenuOpen) {
       setIsNavMenuOpen(false);
     }
-  }, [isMobileViewport, isNavMenuOpen]);
+  }, [isMobileVp, isNavMenuOpen]);
 
   return (
     <div className={cn(style.component, isNavMenuOpen && style["component--open"])}>

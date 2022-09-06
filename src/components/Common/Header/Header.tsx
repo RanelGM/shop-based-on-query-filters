@@ -12,17 +12,17 @@ import logo from "assets/img/content/logo.svg";
 import style from "./Header.module.scss";
 
 export const Header = () => {
-  const { isMobileViewport } = useViewport();
+  const { isMobileVp } = useViewport();
 
   // На мобильных устройства рендерится иконка поиска, при клике на которую появляется модальное окно поиска
   const [isModalOpen, modalCallbacks] = useModal({});
 
   useEffect(() => {
     // Сбрасывает открытое окно поиска в случае, если это не мобильный вьюпорт
-    if (!isMobileViewport && isModalOpen) {
+    if (!isMobileVp && isModalOpen) {
       modalCallbacks.closeModal();
     }
-  }, [isMobileViewport, isModalOpen, modalCallbacks]);
+  }, [isMobileVp, isModalOpen, modalCallbacks]);
 
   const onSearchButtonClick = () => {
     modalCallbacks.openModal();
@@ -40,7 +40,7 @@ export const Header = () => {
 
           <Navigation />
 
-          {isMobileViewport ? (
+          {isMobileVp ? (
             <button className={style.buttonSearch} type="button" onClick={onSearchButtonClick}>
               <Icon className={style.iconSearch} iconName="search" />
             </button>

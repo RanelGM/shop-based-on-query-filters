@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useModal from "hooks/useModal";
 import { useViewport } from "hooks/useViewport";
 import { Button } from "components/Common/Button/Button";
@@ -12,9 +13,21 @@ import style from "./Catalog.module.scss";
 const mockGuitarCount = 9;
 
 export const Catalog = () => {
-  const { isDesktopViewport, isMobileViewport } = useViewport();
+  const { isDesktopVp, isMobileVp } = useViewport();
   const [isFilterModalOpen, filterModalCallbacks] = useModal({});
   const [isSortModalOpen, sortModalCallbacks] = useModal({});
+
+  useEffect(() => {
+    // Кнопка фильтров и его попап доступны только на недесктопном вьюпорте
+    if (isDesktopVp && isFilterModalOpen) {
+      filterModalCallbacks.closeModal();
+    }
+
+    // Кнопка сортировки и его попап доступны только на мобильном вьюпорте
+    if (!isMobileVp && isSortModalOpen) {
+      sortModalCallbacks.closeModal();
+    }
+  }, [isDesktopVp, isMobileVp, isFilterModalOpen, filterModalCallbacks, isSortModalOpen, sortModalCallbacks]);
 
   return (
     <>
@@ -30,11 +43,11 @@ export const Catalog = () => {
       )}
 
       <section className={style.component}>
-        {isDesktopViewport && <Filter />}
+        {isDesktopVp && <Filter />}
 
         <div className={style.catalogWrapper}>
           <div className={style.filtersWrapper}>
-            {!isDesktopViewport && (
+            {!isDesktopVp && (
               <Button
                 icon={<Icon iconName="filter" />}
                 className={style.filterButton}
@@ -45,7 +58,7 @@ export const Catalog = () => {
               </Button>
             )}
 
-            {isMobileViewport ? (
+            {isMobileVp ? (
               <Button className={style.filterButton} color="white-black" onClick={sortModalCallbacks.openModal}>
                 Сортировка
               </Button>
