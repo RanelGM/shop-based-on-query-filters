@@ -6,6 +6,14 @@ export enum AppRoute {
   About = "/about",
 }
 
+export enum APIRoute {
+  Guitars = "/guitars",
+}
+
+export enum Query {
+  EmbedComments = "_embed=comments",
+}
+
 export enum Viewport {
   Mobile = "Mobile",
   Tablet = "Tablet",

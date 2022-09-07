@@ -11,6 +11,7 @@ type RatingStarsProps = {
 
 export const RatingStars = (props: RatingStarsProps) => {
   const { rating, width = 12, height = 12, starCount: count = 5, commentCount } = props;
+  const isCommentCountShow = commentCount !== undefined;
 
   return (
     <div className={style.component}>
@@ -23,7 +24,7 @@ export const RatingStars = (props: RatingStarsProps) => {
         />
       ))}
 
-      {commentCount && <span className={style.comment}>{commentCount}</span>}
+      {isCommentCountShow && <span className={style.comment}>{commentCount}</span>}
     </div>
   );
 };

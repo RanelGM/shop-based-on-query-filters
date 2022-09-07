@@ -12,3 +12,7 @@ export const checkViewport = () => {
       return Viewport.Desktop;
   }
 };
+
+export const formatPrice = (price: number) => {
+  return `${price.toLocaleString("ru")}\xa0₽`;
+};

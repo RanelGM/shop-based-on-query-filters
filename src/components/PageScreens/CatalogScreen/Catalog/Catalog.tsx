@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getCurrentViewport } from "store/ui/selectors";
 import useModal from "hooks/useModal";
+import { Guitar } from "types/guitar";
 import { Button } from "components/Common/Button/Button";
 import { Icon } from "components/Common/Icon/Icon";
 import { FilterSortModal } from "components/Modals/FilterSortModal/FilterSortModal";
@@ -11,9 +12,13 @@ import { GuitarCard } from "./GuitarCard/GuitarCard";
 import { Sort } from "./Sort/Sort";
 import style from "./Catalog.module.scss";
 
-const mockGuitarCount = 9;
+type CatalogProps = {
+  guitars: Guitar[] | null;
+  isLoading: boolean;
+};
 
-export const Catalog = () => {
+export const Catalog = (props: CatalogProps) => {
+  const { guitars } = props;
   const { isMobileVp, isDesktopVp } = useSelector(getCurrentViewport);
   const [isFilterModalOpen, filterModalCallbacks] = useModal({});
   const [isSortModalOpen, sortModalCallbacks] = useModal({});
@@ -68,11 +73,12 @@ export const Catalog = () => {
             )}
           </div>
           <ul className={style.guitarsList}>
-            {Array.from({ length: mockGuitarCount }, (item, index) => (
-              <li key={index}>
-                <GuitarCard />
-              </li>
-            ))}
+            {guitars &&
+              guitars.map((guitar) => (
+                <li key={guitar.id}>
+                  <GuitarCard guitar={guitar} />
+                </li>
+              ))}
           </ul>
           <Pagination />
         </div>
