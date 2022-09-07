@@ -1,7 +1,8 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getCurrentViewport } from "store/ui/selectors";
 import useModal from "hooks/useModal";
-import { useViewport } from "hooks/useViewport";
 import { SearchFormModal } from "components/Modals/SearchFormModal/SearchFormModal";
 import { Icon } from "../Icon/Icon";
 import { Positioner } from "../Positioner/Positioner";
@@ -12,7 +13,7 @@ import logo from "assets/img/content/logo.svg";
 import style from "./Header.module.scss";
 
 export const Header = () => {
-  const { isMobileVp } = useViewport();
+  const { isMobileVp } = useSelector(getCurrentViewport);
 
   // На мобильных устройства рендерится иконка поиска, при клике на которую появляется модальное окно поиска
   const [isModalOpen, modalCallbacks] = useModal({});

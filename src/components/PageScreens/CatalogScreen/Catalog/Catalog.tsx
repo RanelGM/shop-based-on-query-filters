@@ -1,6 +1,7 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getCurrentViewport } from "store/ui/selectors";
 import useModal from "hooks/useModal";
-import { useViewport } from "hooks/useViewport";
 import { Button } from "components/Common/Button/Button";
 import { Icon } from "components/Common/Icon/Icon";
 import { FilterSortModal } from "components/Modals/FilterSortModal/FilterSortModal";
@@ -13,7 +14,7 @@ import style from "./Catalog.module.scss";
 const mockGuitarCount = 9;
 
 export const Catalog = () => {
-  const { isDesktopVp, isMobileVp } = useViewport();
+  const { isMobileVp, isDesktopVp } = useSelector(getCurrentViewport);
   const [isFilterModalOpen, filterModalCallbacks] = useModal({});
   const [isSortModalOpen, sortModalCallbacks] = useModal({});
 

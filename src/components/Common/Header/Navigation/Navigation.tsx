@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import cn from "classnames";
+import { getCurrentViewport } from "store/ui/selectors";
 import { useBodyScrollLock } from "hooks/useBodyScrollLock";
-import { useViewport } from "hooks/useViewport";
 import { HEADER_NAV_LINKS } from "utils/constants";
 import style from "./Navigation.module.scss";
 
 export const Navigation = () => {
-  const { isMobileVp } = useViewport();
+  const { isMobileVp } = useSelector(getCurrentViewport);
   const [isNavMenuOpen, setIsNavMenuOpen] = useState(false);
   const onNavMenuToggle = () => setIsNavMenuOpen((prevState) => !prevState);
 
