@@ -9,13 +9,7 @@ export const GuitarCard = () => {
 
   return (
     <div className={style.component}>
-      <img
-        className={style.image}
-        width="68"
-        height="190"
-        alt="Гитара"
-        src={require("../../../../../assets/img/content/guitar1.jpg")}
-      />
+      <img className={style.image} width="68" height="190" alt="Гитара" src={"img/guitar1.jpg"} />
 
       <div className={style.infoWrapper}>
         <RatingStars rating={mockRating} commentCount={5} />
