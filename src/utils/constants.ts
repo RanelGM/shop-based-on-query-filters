@@ -11,10 +11,6 @@ export enum APIRoute {
   Guitars = "/guitars",
 }
 
-export enum Query {
-  EmbedComments = "_embed=comments",
-}
-
 export enum Viewport {
   Mobile = "Mobile",
   Tablet = "Tablet",
@@ -66,3 +62,5 @@ export const ALL_GUITAR_STRINGS = Array.from(
 );
 
 export const MAX_GUITARS_FOR_PAGE = 9;
+export const MAX_PAGINATION_COUNT = 3;
+export const PAGINATION_COUNT_HEADER = "x-total-count";

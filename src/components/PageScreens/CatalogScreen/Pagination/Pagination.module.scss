@@ -22,16 +22,19 @@
   font-size: 12px;
   line-height: 20px;
   letter-spacing: 0.05em;
+  transition: none;
 
   &--active {
     background-color: var(--background-secondary);
     color: var(--text-secondary);
+    font-weight: bold;
     pointer-events: none;
   }
 
   &--prev,
   &--next {
     min-width: 80px;
+    transition: color 0.3s ease, background-color 0.3s ease;
   }
 
   &--prev {

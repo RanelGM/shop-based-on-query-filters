@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
 import { loadGuitars } from "store/guitar/asyncActions";
 import { getGuitars } from "store/guitar/selectors";
 import { useAsyncDispatch } from "hooks/useAsyncDispatch";
@@ -7,8 +9,18 @@ import { Catalog } from "./Catalog/Catalog";
 import style from "./CatalogScreen.module.scss";
 
 export const CatalogScreen = () => {
+  const currentPage = useParams().page;
+  const { pathname } = useLocation();
   const guitars = useSelector(getGuitars);
-  const [status] = useAsyncDispatch({ onLoad: () => loadGuitars(), isLoadImmediate: true });
+  const [status, , resetStatus] = useAsyncDispatch({
+    onLoad: () => loadGuitars(Number(currentPage)),
+    isLoadImmediate: true,
+  });
+
+  useEffect(() => {
+    // Повторно загружает данные при смене страницы каталога (pathname)
+    resetStatus();
+  }, [pathname, resetStatus]);
 
   return (
     <Positioner>

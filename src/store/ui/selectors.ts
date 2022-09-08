@@ -11,3 +11,5 @@ export const getCurrentViewport = (state: RootReducerState) => {
     isDesktopVp: currentViewport === Viewport.Desktop,
   };
 };
+
+export const getPaginationCount = (state: RootReducerState) => state.ui.paginationCount;
