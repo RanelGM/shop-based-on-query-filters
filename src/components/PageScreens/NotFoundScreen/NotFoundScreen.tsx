@@ -8,7 +8,7 @@ export const NotFoundScreen = () => {
     <Positioner className={style.positioner}>
       <h1>Запрашиваемая страница не найдена</h1>
 
-      <ButtonLink to={AppRoute.Catalog} color="white-black">
+      <ButtonLink to={AppRoute.Main} color="white-black">
         Вернуться на главную
       </ButtonLink>
     </Positioner>

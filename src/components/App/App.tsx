@@ -7,13 +7,15 @@ import { getCurrentViewport } from "store/ui/selectors";
 import { Footer } from "components/Common/Footer/Footer";
 import { Header } from "components/Common/Header/Header";
 import { CatalogScreen } from "components/PageScreens/CatalogScreen/CatalogScreen";
+import { MainScreen } from "components/PageScreens/MainScreen/MainScreen";
 import { NotFoundScreen } from "components/PageScreens/NotFoundScreen/NotFoundScreen";
 import { AppRoute } from "utils/constants";
 import { checkViewport } from "utils/utils";
 import style from "./App.module.scss";
 
 const APP_ROUTES = [
-  { path: AppRoute.Catalog, element: <CatalogScreen /> },
+  { path: AppRoute.Main, element: <MainScreen /> },
+  { path: `${AppRoute.Catalog}/:page`, element: <CatalogScreen /> },
   { path: "*", element: <NotFoundScreen /> },
 ];
 

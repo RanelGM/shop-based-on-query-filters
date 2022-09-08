@@ -15,7 +15,7 @@ export const GuitarCard = ({ guitar }: GuitarCardProps) => {
 
   return (
     <div className={style.component}>
-      <img className={style.image} width="68" height="190" alt="Гитара" src={previewImg} />
+      <img className={style.image} width="68" height="190" alt="Гитара" src={`/${previewImg}`} />
 
       <div className={style.infoWrapper}>
         <RatingStars rating={rating} commentCount={comments.length} />

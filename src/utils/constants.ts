@@ -1,5 +1,6 @@
 export enum AppRoute {
-  Catalog = "/",
+  Main = "/",
+  Catalog = "/catalog",
   Product = "/product",
   Cart = "/cart",
   Shops = "/shops",
@@ -63,3 +64,5 @@ export const ALL_GUITAR_STRINGS = Array.from(
     }, [] as string[]),
   ),
 );
+
+export const MAX_GUITARS_FOR_PAGE = 9;

@@ -35,7 +35,7 @@ export const Header = () => {
 
       <header className={style.component}>
         <Positioner className={style.positioner}>
-          <Link className={style.logo} to={"/"}>
+          <Link className={style.logo} to={AppRoute.Main}>
             <img src={logo} width="70" height="70" alt="Логотип" />
           </Link>
 
