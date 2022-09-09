@@ -11,17 +11,17 @@ import style from "./CatalogScreen.module.scss";
 
 export const CatalogScreen = () => {
   const currentPage = useParams().page;
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const guitars = useSelector(getGuitars);
   const [status, , resetStatus] = useAsyncDispatch({
-    onLoad: () => loadGuitars(Number(currentPage)),
+    onLoad: () => loadGuitars(Number(currentPage), search),
     isLoadImmediate: true,
   });
 
   useEffect(() => {
-    // Повторно загружает данные при смене страницы каталога (pathname)
+    // Повторно загружает данные при смене страницы каталога (pathname) или search параметров
     resetStatus();
-  }, [pathname, resetStatus]);
+  }, [pathname, search, resetStatus]);
 
   return (
     <Positioner>

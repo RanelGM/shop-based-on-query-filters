@@ -23,6 +23,8 @@
 .button {
   @extend %button-reset;
 
+  text-transform: lowercase;
+
   &--type {
     margin-right: 35px;
   }
@@ -74,7 +76,7 @@
     opacity: 1;
   }
 
-  &--down {
+  &--desc {
     transform: rotate(180deg);
   }
 }
@@ -107,6 +109,7 @@
     display: flex;
     width: auto;
     height: auto;
+    text-transform: none;
 
     &--order::before {
       content: none;
@@ -114,9 +117,7 @@
   }
 
   .buttonText {
-    &::first-letter {
-      text-transform: capitalize;
-    }
+    text-transform: none;
 
     .button--order & {
       display: initial;

@@ -11,6 +11,12 @@ export enum APIRoute {
   Guitars = "/guitars",
 }
 
+export enum Query {
+  Sort = "_sort",
+  Order = "_order",
+  Comments = "_embed=comments",
+}
+
 export enum Viewport {
   Mobile = "Mobile",
   Tablet = "Tablet",
@@ -20,6 +26,16 @@ export enum Viewport {
 export enum ViewportMaxWidth {
   Mobile = 767,
   Tablet = 1023,
+}
+
+export enum SortType {
+  Price = "price",
+  Rating = "rating",
+}
+
+export enum SortOrder {
+  Asc = "asc",
+  Desc = "desc",
 }
 
 export enum GuitarType {
@@ -51,6 +67,16 @@ export const GUITAR = {
   Electric: { id: "2", type: GuitarType.Electric, label: "Электрогитара", strings: ["4", "6", "7"] },
   Ukulele: { id: "3", type: GuitarType.Ukulele, label: "Укулеле", strings: ["4"] },
 } as const;
+
+export const SORT_TYPES = [
+  { id: SortType.Price, type: SortType.Price, label: "По цене" },
+  { id: SortType.Rating, type: SortType.Rating, label: "По популярности" },
+] as const;
+
+export const SORT_ORDERS = [
+  { id: SortOrder.Asc, type: SortOrder.Asc, label: "Сначала дешёвые" },
+  { id: SortOrder.Desc, type: SortOrder.Desc, label: "Сначала дорогие" },
+] as const;
 
 export const ALL_GUITAR_TYPES = Object.values(GuitarType);
 export const ALL_GUITAR_STRINGS = Array.from(
