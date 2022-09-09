@@ -24,12 +24,10 @@ export const Overlay = (props: OverlayProps) => {
   useEffect(() => {
     const addContainer = () => {
       document.body.appendChild(containerRef.current);
-      document.body.classList.add(style.lock);
     };
 
     const removeContainer = () => {
       document.body.removeChild(containerRef.current);
-      document.body.classList.remove(style.lock);
     };
 
     addContainer();

@@ -24,7 +24,9 @@
 }
 
 .guitarsList {
+  position: relative;
   display: grid;
+  flex-grow: 1;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   justify-items: center;

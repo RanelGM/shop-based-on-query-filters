@@ -14,7 +14,6 @@ import style from "./Catalog.module.scss";
 
 type CatalogProps = {
   guitars: Guitar[] | null;
-  isLoading: boolean;
 };
 
 export const Catalog = (props: CatalogProps) => {
