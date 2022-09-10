@@ -65,9 +65,24 @@ export const FOOTER_CONTACT_LINKS = [
 ] as const;
 
 export const GUITAR = {
-  Acoustic: { id: "1", type: GuitarType.Acoustic, label: "Акустическая гитара", strings: ["6", "7", "12"] },
-  Electric: { id: "2", type: GuitarType.Electric, label: "Электрогитара", strings: ["4", "6", "7"] },
-  Ukulele: { id: "3", type: GuitarType.Ukulele, label: "Укулеле", strings: ["4"] },
+  [GuitarType.Acoustic]: {
+    id: "1",
+    type: GuitarType.Acoustic,
+    label: "Акустическая гитара",
+    strings: ["6", "7", "12"],
+  },
+  [GuitarType.Electric]: {
+    id: "2",
+    type: GuitarType.Electric,
+    label: "Электрогитара",
+    strings: ["4", "6", "7"],
+  },
+  [GuitarType.Ukulele]: {
+    id: "3",
+    type: GuitarType.Ukulele,
+    label: "Укулеле",
+    strings: ["4"],
+  },
 } as const;
 
 export const SORT_TYPES = [
