@@ -16,7 +16,7 @@ export const checkViewport = () => {
 
 export const formatPrice = (price: number) => {
   // Форматирует число в строку с разделителями каждые 3 знака и ₽ в конце
-  return `${price.toLocaleString("ru")}\xa0₽`;
+  return `${price.toLocaleString("ru")}`;
 };
 
 export const updateArray = <T>(array: T[], item: T): T[] => {

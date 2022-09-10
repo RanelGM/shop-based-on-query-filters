@@ -21,7 +21,7 @@ export const GuitarCard = ({ guitar }: GuitarCardProps) => {
         <RatingStars rating={rating} commentCount={comments.length} />
         <div className={style.info}>
           <p className={style.infoTitle}>{name}</p>
-          <p className={style.infoPrice}>{formatPrice(price)}</p>
+          <p className={style.infoPrice}>{formatPrice(price)} ₽</p>
         </div>
 
         <div className={style.buttonsWrapper}>

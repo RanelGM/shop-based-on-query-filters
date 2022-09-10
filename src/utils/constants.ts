@@ -16,7 +16,6 @@ export enum Query {
   Order = "_order",
   Type = "type",
   String = "stringCount",
-  Comments = "_embed=comments",
 }
 
 export enum Viewport {

@@ -1,17 +1,49 @@
+import { createSearchParams } from "react-router-dom";
 import { AsyncActionResult } from "store/store";
 import { setPaginationCount } from "store/ui/actions";
 import { Guitar } from "types/guitar";
-import { setGuitars } from "./actions";
-import { APIRoute, MAX_GUITARS_FOR_PAGE, PAGINATION_COUNT_HEADER, Query } from "utils/constants";
+import { setGuitars, setPrice } from "./actions";
+import { APIRoute, MAX_GUITARS_FOR_PAGE, PAGINATION_COUNT_HEADER, Query, SortOrder, SortType } from "utils/constants";
 
-export const loadGuitars = (currentPage: number, searchParams: string): AsyncActionResult => {
+const getURLForMinMaxPrice = (search: URLSearchParams, order: SortOrder) => {
+  search.delete(Query.Sort);
+  search.delete(Query.Order);
+  search.set(Query.Sort, SortType.Price);
+  search.set(Query.Order, order);
+  return search.toString();
+};
+
+export const loadGuitars = (currentPage: number, searchParams: URLSearchParams): AsyncActionResult => {
   return async (dispatch, _getState, axios) => {
     const limit = `&_start=${(currentPage - 1) * MAX_GUITARS_FOR_PAGE}&_limit=${MAX_GUITARS_FOR_PAGE}`;
-    const params = searchParams ? `${searchParams}&${Query.Comments}` : `?${Query.Comments}`;
+    const params = searchParams ? `?${searchParams}&_embed=comments` : "?_embed=comments";
 
     const { data, headers } = await axios.get<Guitar[]>(`${APIRoute.Guitars}${params}${limit}`);
 
+    const guitarsCount = Number(headers[PAGINATION_COUNT_HEADER]);
+    let minPrice = 0;
+    let maxPrice = 0;
+
+    // Минимальная и максимальная цена устанавливается в плейсхолдере фильтров по диапазону цен
+    // Сервером не предусмотрена передача минимальной и максимальной цены гитар (с учетом выбранных фильтров) в headers
+    // Поэтому в случае, если кол-во гитар больше, чем загруженное (определяется MAX_GUITARS_FOR_PAGE)
+    // то делается доп. запрос на 1 гитару с самой высокой ценой и 1 гитару с самой низкой
+    // Иначе определяется из тех цен, что уже загружены
+    if (guitarsCount > MAX_GUITARS_FOR_PAGE) {
+      const minPriceParams = getURLForMinMaxPrice(searchParams, SortOrder.Asc);
+      const maxPriceParams = getURLForMinMaxPrice(searchParams, SortOrder.Desc);
+      const { data: minPriceGuitar } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?${minPriceParams}&limit=1`);
+      const { data: maxPriceGuitar } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?${maxPriceParams}&limit=1`);
+      minPrice = minPriceGuitar.length > 0 ? minPriceGuitar[0].price : 0;
+      maxPrice = maxPriceGuitar.length > 0 ? maxPriceGuitar[0].price : 0;
+    } else {
+      const prices = data.map((guitar) => guitar.price);
+      minPrice = prices.length > 0 ? Math.min(...prices) : 0;
+      maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
+    }
+
     dispatch(setGuitars(data));
-    dispatch(setPaginationCount(Number(headers[PAGINATION_COUNT_HEADER]) / MAX_GUITARS_FOR_PAGE));
+    dispatch(setPaginationCount(guitarsCount / MAX_GUITARS_FOR_PAGE));
+    dispatch(setPrice({ min: minPrice, max: maxPrice }));
   };
 };

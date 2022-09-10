@@ -23,3 +23,8 @@ export type Guitar = {
   price: number;
   comments: UserComment[];
 };
+
+export type Price = {
+  min: number;
+  max: number;
+};
