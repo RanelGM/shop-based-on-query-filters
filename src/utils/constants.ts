@@ -14,6 +14,8 @@ export enum APIRoute {
 export enum Query {
   Sort = "_sort",
   Order = "_order",
+  Type = "type",
+  String = "stringCount",
   Comments = "_embed=comments",
 }
 
