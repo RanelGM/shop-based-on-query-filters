@@ -1,5 +1,6 @@
+import { MouseEvent } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { createSearchParams, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import cn from "classnames";
 import { getPaginationCount } from "store/ui/selectors";
 import { ButtonLink } from "components/Common/ButtonLink/ButtonLink";
@@ -39,9 +40,22 @@ export const Pagination = () => {
   const paginationCount = useSelector(getPaginationCount);
   const activePage = Number(useParams().page);
   const pages = getPages(activePage, paginationCount);
-
   const isPrevLinkShow = activePage > 1;
   const isNextLinkShow = activePage < paginationCount;
+
+  const [searchParams] = useSearchParams();
+  const navigateTo = useNavigate();
+
+  const onLinkClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    // Для того, чтобы при пагинации сохранились search параметры, навигация осуществляется через useNavigate
+    evt.preventDefault();
+    const pathname = (evt.target as HTMLAnchorElement).pathname;
+
+    navigateTo({
+      pathname: pathname,
+      search: createSearchParams(searchParams).toString(),
+    });
+  };
 
   return (
     <>
@@ -54,6 +68,7 @@ export const Pagination = () => {
                   className={cn(style.buttonLink, style["buttonLink--prev"])}
                   to={`${AppRoute.Catalog}/${activePage - 1}`}
                   color="white-black"
+                  onClick={onLinkClick}
                 >
                   Назад
                 </ButtonLink>
@@ -66,6 +81,7 @@ export const Pagination = () => {
                   className={cn(style.buttonLink, page === activePage && style["buttonLink--active"])}
                   to={`${AppRoute.Catalog}/${page}`}
                   color="white-black"
+                  onClick={onLinkClick}
                 >
                   {page}
                 </ButtonLink>
@@ -78,6 +94,7 @@ export const Pagination = () => {
                   className={cn(style.buttonLink, style["buttonLink--next"])}
                   to={`${AppRoute.Catalog}/${activePage + 1}`}
                   color="white-black"
+                  onClick={onLinkClick}
                 >
                   Далее
                 </ButtonLink>
