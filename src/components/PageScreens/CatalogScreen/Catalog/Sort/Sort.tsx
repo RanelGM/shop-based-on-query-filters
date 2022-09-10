@@ -5,7 +5,7 @@ import cn from "classnames";
 import { getCurrentViewport } from "store/ui/selectors";
 import { Button } from "components/Common/Button/Button";
 import { Icon } from "components/Common/Icon/Icon";
-import { Query, SORT_TYPES, SORT_ORDERS } from "utils/constants";
+import { Query, SORT_TYPES, SORT_ORDERS, SortOrder, SortType } from "utils/constants";
 import style from "./Sort.module.scss";
 
 type SortProps = {
@@ -49,11 +49,19 @@ export const Sort = (props: SortProps) => {
   }, [isMobileVp, updateSearchParams]);
 
   const onSortTypeButtonClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    setState((prevState) => ({ ...prevState, [Query.Sort]: currentTarget.id }));
+    setState((prevState) => ({
+      [Query.Sort]: currentTarget.id,
+      // В случае, если ранее не был выбран порядок сортировки, то установится "По убыванию"
+      [Query.Order]: prevState[Query.Order] ? prevState[Query.Order] : SortOrder.Desc,
+    }));
   };
 
   const onSortOrderButtonClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    setState((prevState) => ({ ...prevState, [Query.Order]: currentTarget.id }));
+    setState((prevState) => ({
+      [Query.Order]: currentTarget.id,
+      // В случае, если ранее не был выбран тип сортировки, то установится "По цене"
+      [Query.Sort]: prevState[Query.Sort] ? prevState[Query.Sort] : SortType.Price,
+    }));
   };
 
   const onSubmitButtonClick = () => {

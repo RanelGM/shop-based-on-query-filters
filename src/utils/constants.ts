@@ -91,8 +91,8 @@ export const SORT_TYPES = [
 ] as const;
 
 export const SORT_ORDERS = [
-  { id: SortOrder.Asc, type: SortOrder.Asc, label: "Сначала дешёвые" },
-  { id: SortOrder.Desc, type: SortOrder.Desc, label: "Сначала дорогие" },
+  { id: SortOrder.Asc, type: SortOrder.Asc, label: "По возрастанию" },
+  { id: SortOrder.Desc, type: SortOrder.Desc, label: "По убыванию" },
 ] as const;
 
 export const ALL_GUITAR_TYPES = Object.values(GuitarType);
