@@ -11,6 +11,7 @@ type IconName =
   | "github"
   | "mail"
   | "triangle"
+  | "triangle-empty"
   | "star"
   | "starEmpty"
   | "filter";
@@ -70,8 +71,14 @@ export const Icon = ({ iconName, className, ...rest }: IconProps) => {
       );
     case "triangle":
       return (
-        <svg className={cn(style.icon, className)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" {...rest}>
-          <path d="M4.583 15.667h12.833L11 5.584 4.583 15.667Z" />
+        <svg className={cn(style.icon, className)} viewBox="-2 -4 24 24" xmlns="http://www.w3.org/2000/svg" {...rest}>
+          <path d="m12.547 1.621 6.095 9.794A3 3 0 0 1 16.095 16H3.905a3 3 0 0 1-2.547-4.585L7.453 1.62a3 3 0 0 1 5.094 0z" />
+        </svg>
+      );
+    case "triangle-empty":
+      return (
+        <svg viewBox="-2 -4 24 24" className={cn(style.icon, className)} xmlns="http://www.w3.org/2000/svg" {...rest}>
+          <path d="M10.528 2.358a1 1 0 0 0-1.377.32l-6.095 9.794A1 1 0 0 0 3.905 14h12.19a1 1 0 0 0 .85-1.528l-6.096-9.794a1 1 0 0 0-.32-.32zm2.019-.737 6.095 9.794A3 3 0 0 1 16.095 16H3.905a3 3 0 0 1-2.547-4.585L7.453 1.62a3 3 0 0 1 5.094 0z" />
         </svg>
       );
     case "star":

@@ -1,6 +1,5 @@
 import { ButtonClose } from "components/Common/Button/ButtonClose";
 import { Overlay } from "components/Common/Overlay/Overlay";
-import { Sort } from "components/PageScreens/CatalogScreen/Catalog/Sort/Sort";
 import style from "./FilterSortModal.module.scss";
 
 type FilterSortModalProps = {

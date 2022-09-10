@@ -35,6 +35,15 @@
   list-style: none;
 }
 
+.sortIcons {
+  display: flex;
+  flex-direction: column;
+
+  svg:last-child {
+    transform: rotate(180deg);
+  }
+}
+
 @include viewport-mobile {
   .catalogWrapper {
     justify-content: space-between;

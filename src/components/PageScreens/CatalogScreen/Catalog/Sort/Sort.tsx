@@ -1,29 +1,56 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import cn from "classnames";
+import { getCurrentViewport } from "store/ui/selectors";
+import { Button } from "components/Common/Button/Button";
 import { Icon } from "components/Common/Icon/Icon";
-import { SortType, Query, SORT_TYPES, SORT_ORDERS } from "utils/constants";
+import { Query, SORT_TYPES, SORT_ORDERS } from "utils/constants";
+import { getObjectTruthyValue } from "utils/utils";
 import style from "./Sort.module.scss";
 
-export const Sort = () => {
+type SortProps = {
+  onModalClose: () => void;
+};
+
+type State = {
+  [Query.Sort]: string | null;
+  [Query.Order]: string | null;
+};
+
+const getDefaultState = (searchParams: URLSearchParams): State => ({
+  [Query.Sort]: searchParams.get(Query.Sort),
+  [Query.Order]: searchParams.get(Query.Order),
+});
+
+export const Sort = (props: SortProps) => {
+  const { onModalClose } = props;
+  const { isMobileVp } = useSelector(getCurrentViewport);
   const [searchParams, setSearchParams] = useSearchParams();
-  const activeSortType = searchParams.get(Query.Sort);
-  const activeSortOrder = searchParams.get(Query.Order);
+  const [state, setState] = useState<State>(getDefaultState(searchParams));
+  const activeSortType = state[Query.Sort];
+  const activeSortOrder = state[Query.Order];
+
+  useEffect(() => {
+    if (!isMobileVp) {
+      // На мобильных устройствах searchParams устанавливаются по кнопке "Применить"
+      const activeSortParams = getObjectTruthyValue(state);
+      setSearchParams(activeSortParams);
+    }
+  }, [isMobileVp, setSearchParams, state]);
 
   const onSortTypeButtonClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    searchParams.set(Query.Sort, currentTarget.id);
-    setSearchParams(searchParams);
+    setState((prevState) => ({ ...prevState, [Query.Sort]: currentTarget.id }));
   };
 
   const onSortOrderButtonClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    searchParams.set(Query.Order, currentTarget.id);
+    setState((prevState) => ({ ...prevState, [Query.Order]: currentTarget.id }));
+  };
 
-    if (!searchParams.has(Query.Sort)) {
-      // В случае, если не было выбрано сортировки по типу, то по умолчанию установится "по цене"
-      searchParams.set(Query.Sort, SortType.Price);
-    }
-
-    setSearchParams(searchParams);
+  const onSubmitButtonClick = () => {
+    const activeSortParams = getObjectTruthyValue(state);
+    setSearchParams(activeSortParams);
+    onModalClose();
   };
 
   return (
@@ -67,6 +94,12 @@ export const Sort = () => {
           </button>
         ))}
       </div>
+
+      {isMobileVp && (
+        <Button className={style.buttonSubmit} color="white-black" onClick={onSubmitButtonClick}>
+          Применить
+        </Button>
+      )}
     </div>
   );
 };

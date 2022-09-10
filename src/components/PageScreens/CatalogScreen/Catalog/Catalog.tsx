@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import { getCurrentViewport } from "store/ui/selectors";
 import useModal from "hooks/useModal";
 import { Guitar } from "types/guitar";
@@ -10,10 +11,21 @@ import { Pagination } from "../Pagination/Pagination";
 import { Filter } from "./Filter/Filter";
 import { GuitarCard } from "./GuitarCard/GuitarCard";
 import { Sort } from "./Sort/Sort";
+import { Query } from "utils/constants";
 import style from "./Catalog.module.scss";
 
 type CatalogProps = {
   guitars: Guitar[] | null;
+};
+
+const getSortIcon = (isSortActive: boolean) => {
+  // Если применён фильтр, то иконка будет закрашена
+  return (
+    <div className={style.sortIcons}>
+      <Icon iconName={isSortActive ? "triangle" : "triangle-empty"} />
+      <Icon iconName={isSortActive ? "triangle" : "triangle-empty"} />
+    </div>
+  );
 };
 
 export const Catalog = (props: CatalogProps) => {
@@ -21,6 +33,9 @@ export const Catalog = (props: CatalogProps) => {
   const { isMobileVp, isDesktopVp } = useSelector(getCurrentViewport);
   const [isFilterModalOpen, filterModalCallbacks] = useModal({});
   const [isSortModalOpen, sortModalCallbacks] = useModal({});
+
+  const [searchParams] = useSearchParams();
+  const isSortActive = Boolean(searchParams.get(Query.Sort)) || Boolean(searchParams.get(Query.Order));
 
   useEffect(() => {
     // Кнопка фильтров и его попап доступны только на недесктопном вьюпорте
@@ -43,7 +58,7 @@ export const Catalog = (props: CatalogProps) => {
       )}
       {isSortModalOpen && (
         <FilterSortModal onModalClose={sortModalCallbacks.closeModal}>
-          <Sort />
+          <Sort onModalClose={sortModalCallbacks.closeModal} />
         </FilterSortModal>
       )}
 
@@ -64,11 +79,16 @@ export const Catalog = (props: CatalogProps) => {
             )}
 
             {isMobileVp ? (
-              <Button className={style.filterButton} color="white-black" onClick={sortModalCallbacks.openModal}>
+              <Button
+                icon={getSortIcon(isSortActive)}
+                className={style.filterButton}
+                color="white-black"
+                onClick={sortModalCallbacks.openModal}
+              >
                 Сортировка
               </Button>
             ) : (
-              <Sort />
+              <Sort onModalClose={sortModalCallbacks.closeModal} />
             )}
           </div>
           <ul className={style.guitarsList}>
