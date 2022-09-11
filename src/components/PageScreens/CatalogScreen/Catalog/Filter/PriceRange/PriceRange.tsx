@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, KeyboardEvent, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { getPrice } from "store/guitar/selectors";
@@ -82,6 +82,12 @@ export const PriceRange = (props: PriceRangeProps) => {
     setSearchParams(searchParams);
   };
 
+  const onEnterKeydown = (evt: KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key === "Enter") {
+      evt.currentTarget.blur();
+    }
+  };
+
   return (
     <div className={filterStyle.filterWrapper}>
       <p className={filterStyle.legend}>Цена, ₽</p>
@@ -93,6 +99,7 @@ export const PriceRange = (props: PriceRangeProps) => {
           value={activePrice.from}
           onChange={onInputChange}
           onBlur={onPriceFromInputBlur}
+          onKeyDown={onEnterKeydown}
           placeholder={availablePrice ? formatPrice(availablePrice.min) : ""}
         />
         <Input
@@ -102,6 +109,7 @@ export const PriceRange = (props: PriceRangeProps) => {
           value={activePrice.to}
           onChange={onInputChange}
           onBlur={onPriceToInputBlur}
+          onKeyDown={onEnterKeydown}
           placeholder={availablePrice ? formatPrice(availablePrice.max) : ""}
         />
       </div>

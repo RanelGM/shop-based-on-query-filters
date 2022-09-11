@@ -105,6 +105,21 @@
   cursor: pointer;
 }
 
+%hide-arrows {
+  // Скрывает стрелки у input type number
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    margin: 0;
+    appearance: none;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    appearance: textfield;
+  }
+}
+
 // Animation
 
 // Используется для скрытия нежелательных анимаций-скачков при поворотах / смене вьюпорта экрана
