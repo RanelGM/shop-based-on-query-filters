@@ -6,13 +6,14 @@ import { APIRoute, MAX_GUITARS_FOR_PAGE, PAGINATION_COUNT_HEADER, Query, SortOrd
 
 const getURLForMinMaxPrice = (search: URLSearchParams, order: SortOrder) => {
   // Sort и Order будут заменены, а PriceFrom и PriceTo - удалены, т.к. определяется min и max цена по прочим search параметрам
-  search.delete(Query.Sort);
-  search.delete(Query.Order);
-  search.delete(Query.PriceFrom);
-  search.delete(Query.PriceTo);
-  search.set(Query.Sort, SortType.Price);
-  search.set(Query.Order, order);
-  return search.toString();
+  const copy = new URLSearchParams(search);
+  copy.delete(Query.Sort);
+  copy.delete(Query.Order);
+  copy.delete(Query.PriceFrom);
+  copy.delete(Query.PriceTo);
+  copy.set(Query.Sort, SortType.Price);
+  copy.set(Query.Order, order);
+  return copy.toString();
 };
 
 export const loadGuitars = (currentPage: number, searchParams: URLSearchParams): AsyncActionResult => {
@@ -34,8 +35,8 @@ export const loadGuitars = (currentPage: number, searchParams: URLSearchParams):
     if (guitarsCount > MAX_GUITARS_FOR_PAGE || searchParams.get(Query.PriceFrom) || searchParams.get(Query.PriceTo)) {
       const minPriceParams = getURLForMinMaxPrice(searchParams, SortOrder.Asc);
       const maxPriceParams = getURLForMinMaxPrice(searchParams, SortOrder.Desc);
-      const { data: minPriceGuitar } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?${minPriceParams}&limit=1`);
-      const { data: maxPriceGuitar } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?${maxPriceParams}&limit=1`);
+      const { data: minPriceGuitar } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?${minPriceParams}&_limit=1`);
+      const { data: maxPriceGuitar } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?${maxPriceParams}&_limit=1`);
       minPrice = minPriceGuitar.length > 0 ? minPriceGuitar[0].price : 0;
       maxPrice = maxPriceGuitar.length > 0 ? maxPriceGuitar[0].price : 0;
     } else {
