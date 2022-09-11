@@ -18,8 +18,13 @@ type CatalogProps = {
   guitars: Guitar[] | null;
 };
 
-const getSortIcon = (isSortActive: boolean) => {
+const getFilterIcon = (isFilterActive: boolean) => {
   // Если применён фильтр, то иконка будет закрашена
+  return <Icon iconName={isFilterActive ? "filter" : "filter-empty"} className={style.filterIcon} />;
+};
+
+const getSortIcon = (isSortActive: boolean) => {
+  // Если применена сортировка, то иконка будет закрашена
   return (
     <div className={style.sortIcons}>
       <Icon iconName={isSortActive ? "triangle" : "triangle-empty"} />
@@ -35,7 +40,10 @@ export const Catalog = (props: CatalogProps) => {
   const [isSortModalOpen, sortModalCallbacks] = useModal({});
 
   const [searchParams] = useSearchParams();
-  const isSortActive = Boolean(searchParams.get(Query.Sort)) || Boolean(searchParams.get(Query.Order));
+  const isSortActive = Array.from(searchParams.entries()).some(([key]) => key === Query.Sort || key === Query.Order);
+  const isFilterActive = Array.from(searchParams.entries()).some(
+    ([key]) => key === Query.PriceFrom || key === Query.PriceTo || key === Query.Type || key === Query.String,
+  );
 
   useEffect(() => {
     // Кнопка фильтров и его попап доступны только на недесктопном вьюпорте
@@ -69,7 +77,7 @@ export const Catalog = (props: CatalogProps) => {
           <div className={style.filtersWrapper}>
             {!isDesktopVp && (
               <Button
-                icon={<Icon iconName="filter" />}
+                icon={getFilterIcon(isFilterActive)}
                 className={style.filterButton}
                 color="white-black"
                 onClick={filterModalCallbacks.openModal}

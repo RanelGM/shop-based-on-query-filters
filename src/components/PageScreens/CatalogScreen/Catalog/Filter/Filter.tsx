@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GuitarStrings } from "./GuitarStrings/GuitarStrings";
 import { GuitarTypes } from "./GuitarTypes/GuitarTypes";
@@ -41,7 +41,8 @@ export const Filter = () => {
   // В случае, если выбран тип гитар, то происходит проверка на допустимые струны. Если нет, то все струны допустимы
   const allowedStrings = useMemo(() => (types.length > 0 ? getAllowedStrings(types) : ALL_GUITAR_STRINGS), [types]);
 
-  const updateSearchParams = useCallback(() => {
+  useEffect(() => {
+    // Записывает state в searchParams при перендере компонента
     // В случае, если в стейте выбраны (поставлен чекбокс) струны, которые не допустимы для выбранных типов гитар,
     // тогда из выбранных струн в стейт устанавливаются только допустимые,
     // также происходит выход из функции и она повторно запускается после смены стейта для установки корректных searchParams
@@ -65,10 +66,6 @@ export const Filter = () => {
 
     setSearchParams(searchParams);
   }, [allowedStrings, searchParams, setSearchParams, strings, types]);
-
-  useEffect(() => {
-    updateSearchParams();
-  }, [updateSearchParams]);
 
   return (
     <section className={style.component}>
