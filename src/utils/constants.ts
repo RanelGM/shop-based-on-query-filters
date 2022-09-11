@@ -16,6 +16,8 @@ export enum Query {
   Order = "_order",
   Type = "type",
   String = "stringCount",
+  PriceFrom = "price_gte",
+  PriceTo = "price_lte",
 }
 
 export enum Viewport {

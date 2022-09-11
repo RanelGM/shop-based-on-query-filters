@@ -5,13 +5,16 @@ import { setGuitar, setGuitars, setPrice } from "./actions";
 type State = {
   guitars: Guitar[] | null;
   guitar: Guitar | null;
-  price: Price | null;
+  price: Price;
 };
 
 export const initialState: State = {
   guitars: null,
   guitar: null,
-  price: null,
+  price: {
+    min: 0,
+    max: 0,
+  },
 };
 
 export const guitarReducer = createReducer(initialState, (builder) => {

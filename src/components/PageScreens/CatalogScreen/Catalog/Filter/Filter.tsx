@@ -9,11 +9,19 @@ import style from "./Filter.module.scss";
 export type FilterState = {
   types: string[];
   strings: string[];
+  price: {
+    from: string;
+    to: string;
+  };
 };
 
 const getDefaultState = (searchParams: URLSearchParams): FilterState => ({
   types: searchParams.getAll(Query.Type),
   strings: searchParams.getAll(Query.String),
+  price: {
+    from: searchParams.get(Query.PriceFrom) || "",
+    to: searchParams.get(Query.PriceTo) || "",
+  },
 });
 
 const getAllowedStrings = (types: string[]) => {
@@ -28,7 +36,7 @@ const getAllowedStrings = (types: string[]) => {
 export const Filter = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [state, setState] = useState<FilterState>(getDefaultState(searchParams));
-  const { types, strings } = state;
+  const { types, strings, price } = state;
 
   // В случае, если выбран тип гитар, то происходит проверка на допустимые струны. Если нет, то все струны допустимы
   const allowedStrings = useMemo(() => (types.length > 0 ? getAllowedStrings(types) : ALL_GUITAR_STRINGS), [types]);
@@ -53,6 +61,8 @@ export const Filter = () => {
     searchParams.delete(Query.String);
     strings.forEach((string) => searchParams.append(Query.String, string));
 
+    // Цены устанавливаются сами внутри своего компонента в момент блюра инпута
+
     setSearchParams(searchParams);
   }, [allowedStrings, searchParams, setSearchParams, strings, types]);
 
@@ -63,7 +73,7 @@ export const Filter = () => {
   return (
     <section className={style.component}>
       <h2 className={style.heading}>Фильтры</h2>
-      <PriceRange />
+      <PriceRange activePrice={price} setState={setState} />
       <GuitarTypes activeTypes={types} setState={setState} />
       <GuitarStrings activeStrings={strings} allowedStrings={allowedStrings} setState={setState} />
     </section>

@@ -1,4 +1,3 @@
-import { createSearchParams } from "react-router-dom";
 import { AsyncActionResult } from "store/store";
 import { setPaginationCount } from "store/ui/actions";
 import { Guitar } from "types/guitar";
@@ -6,8 +5,11 @@ import { setGuitars, setPrice } from "./actions";
 import { APIRoute, MAX_GUITARS_FOR_PAGE, PAGINATION_COUNT_HEADER, Query, SortOrder, SortType } from "utils/constants";
 
 const getURLForMinMaxPrice = (search: URLSearchParams, order: SortOrder) => {
+  // Sort и Order будут заменены, а PriceFrom и PriceTo - удалены, т.к. определяется min и max цена по прочим search параметрам
   search.delete(Query.Sort);
   search.delete(Query.Order);
+  search.delete(Query.PriceFrom);
+  search.delete(Query.PriceTo);
   search.set(Query.Sort, SortType.Price);
   search.set(Query.Order, order);
   return search.toString();
@@ -26,10 +28,10 @@ export const loadGuitars = (currentPage: number, searchParams: URLSearchParams):
 
     // Минимальная и максимальная цена устанавливается в плейсхолдере фильтров по диапазону цен
     // Сервером не предусмотрена передача минимальной и максимальной цены гитар (с учетом выбранных фильтров) в headers
-    // Поэтому в случае, если кол-во гитар больше, чем загруженное (определяется MAX_GUITARS_FOR_PAGE)
+    // Поэтому в случае, если кол-во гитар больше, чем загруженное (определяется MAX_GUITARS_FOR_PAGE) или была сортировка по цене
     // то делается доп. запрос на 1 гитару с самой высокой ценой и 1 гитару с самой низкой
     // Иначе определяется из тех цен, что уже загружены
-    if (guitarsCount > MAX_GUITARS_FOR_PAGE) {
+    if (guitarsCount > MAX_GUITARS_FOR_PAGE || searchParams.get(Query.PriceFrom) || searchParams.get(Query.PriceTo)) {
       const minPriceParams = getURLForMinMaxPrice(searchParams, SortOrder.Asc);
       const maxPriceParams = getURLForMinMaxPrice(searchParams, SortOrder.Desc);
       const { data: minPriceGuitar } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?${minPriceParams}&limit=1`);
