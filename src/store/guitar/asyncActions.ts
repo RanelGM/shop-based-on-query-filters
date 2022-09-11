@@ -46,7 +46,7 @@ export const loadGuitars = (currentPage: number, searchParams: URLSearchParams):
     }
 
     dispatch(setGuitars(data));
-    dispatch(setPaginationCount(guitarsCount / MAX_GUITARS_FOR_PAGE));
+    dispatch(setPaginationCount(Math.ceil(guitarsCount / MAX_GUITARS_FOR_PAGE)));
     dispatch(setPrice({ min: minPrice, max: maxPrice }));
   };
 };
