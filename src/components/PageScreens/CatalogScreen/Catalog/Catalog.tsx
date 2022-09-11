@@ -58,7 +58,7 @@ export const Catalog = (props: CatalogProps) => {
       )}
       {isSortModalOpen && (
         <FilterSortModal onModalClose={sortModalCallbacks.closeModal}>
-          <Sort onModalClose={sortModalCallbacks.closeModal} />
+          <Sort />
         </FilterSortModal>
       )}
 
@@ -88,7 +88,7 @@ export const Catalog = (props: CatalogProps) => {
                 Сортировка
               </Button>
             ) : (
-              <Sort onModalClose={sortModalCallbacks.closeModal} />
+              <Sort />
             )}
           </div>
           <ul className={style.guitarsList}>

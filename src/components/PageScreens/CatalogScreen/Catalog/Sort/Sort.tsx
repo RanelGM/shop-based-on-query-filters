@@ -8,10 +8,6 @@ import { Icon } from "components/Common/Icon/Icon";
 import { Query, SORT_TYPES, SORT_ORDERS, SortOrder, SortType } from "utils/constants";
 import style from "./Sort.module.scss";
 
-type SortProps = {
-  onModalClose: () => void;
-};
-
 type SortState = {
   [Query.Sort]: string | null;
   [Query.Order]: string | null;
@@ -22,15 +18,14 @@ const getDefaultState = (searchParams: URLSearchParams): SortState => ({
   [Query.Order]: searchParams.get(Query.Order),
 });
 
-export const Sort = (props: SortProps) => {
-  const { onModalClose } = props;
-  const { isMobileVp } = useSelector(getCurrentViewport);
+export const Sort = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [state, setState] = useState<SortState>(getDefaultState(searchParams));
   const activeSortType = state[Query.Sort];
   const activeSortOrder = state[Query.Order];
 
-  const updateSearchParams = useCallback(() => {
+  useEffect(() => {
+    // Записывает state в searchParams при перендере компонента
     Object.entries(state).forEach(([key, value]) => {
       if (value) {
         searchParams.set(key, value);
@@ -39,14 +34,6 @@ export const Sort = (props: SortProps) => {
 
     setSearchParams(searchParams);
   }, [searchParams, setSearchParams, state]);
-
-  useEffect(() => {
-    // Записывает state в searchParams при перендере компонента
-    // На мобильных устройствах searchParams устанавливаются по кнопке "Применить"
-    if (!isMobileVp) {
-      updateSearchParams();
-    }
-  }, [isMobileVp, updateSearchParams]);
 
   const onSortTypeButtonClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
     setState((prevState) => ({
@@ -62,11 +49,6 @@ export const Sort = (props: SortProps) => {
       // В случае, если ранее не был выбран тип сортировки, то установится "По цене"
       [Query.Sort]: prevState[Query.Sort] ? prevState[Query.Sort] : SortType.Price,
     }));
-  };
-
-  const onSubmitButtonClick = () => {
-    updateSearchParams();
-    onModalClose();
   };
 
   return (
@@ -110,12 +92,6 @@ export const Sort = (props: SortProps) => {
           </button>
         ))}
       </div>
-
-      {isMobileVp && (
-        <Button className={style.buttonSubmit} color="white-black" onClick={onSubmitButtonClick}>
-          Применить
-        </Button>
-      )}
     </div>
   );
 };
