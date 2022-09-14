@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,26 +12,37 @@ import { Icon } from "../Icon/Icon";
 import { Positioner } from "../Positioner/Positioner";
 import { SearchForm } from "../SearchForm/SearchForm";
 import { Navigation } from "./Navigation/Navigation";
-import { AppRoute } from "utils/constants";
+import { AppRoute, Viewport } from "utils/constants";
 import logo from "assets/img/content/logo.svg";
 import style from "./Header.module.scss";
 
 export const Header = () => {
-  const { isMobileVp } = useSelector(getCurrentViewport);
+  const { isMobileVp, currentViewport } = useSelector(getCurrentViewport);
+  const prevViewPortRef = useRef<Viewport>(currentViewport);
   const searchOptions = useSelector(getSearchOptions);
   const [isSearchInputShow, setIsSearchInputShow] = useState(!isMobileVp);
+  // На мобильном разрешении в случае, если открыто окно поиска, лого - не показывается
   const isLogoShow = !isSearchInputShow;
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const [_status, loadSimilar] = useAsyncDispatch({ onLoad: (searchValue: string) => loadSearchGuitars(searchValue) });
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Сбрасывает открытое окно поиска в случае, если это не мобильный вьюпорт
-    if (!isMobileVp && isSearchInputShow) {
-      setIsSearchInputShow(false);
+  const resetSearch = useCallback(() => {
+    // Сброс всех значений поиска
+    setIsSearchInputShow(false);
+    dispatch(setSearch(null));
+
+    if (searchInputRef.current) {
+      searchInputRef.current.value = "";
     }
-  }, [isMobileVp, isSearchInputShow]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    // Сбрасывает все значения поиска при смене вьюпорта
+    resetSearch();
+    prevViewPortRef.current = currentViewport;
+  }, [currentViewport, resetSearch]);
 
   const onSearchInputChange = ({ currentTarget }: ChangeEvent<HTMLInputElement>) => {
     const value = currentTarget.value;
@@ -47,12 +58,20 @@ export const Header = () => {
     evt.preventDefault();
 
     if (!isMobileVp) {
+      // Используется только на мобильных разрешениях
+      return;
+    }
+
+    if (isSearchInputShow) {
+      // Повторное нажание на кнопку поиска - сбрасывает все значения, закрывает форму поиска
+      resetSearch();
       return;
     }
 
     setIsSearchInputShow(true);
 
     setTimeout(() => {
+      // Использует event loop, чтобы корректно навесить фокус на инпут, т.к. до смены стейта он display: none
       if (searchInputRef.current) {
         searchInputRef.current.focus();
       }
