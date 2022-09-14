@@ -6,15 +6,21 @@ type UseDebounceProps<T extends unknown[]> = {
   timeout: number;
 };
 
-export const useDebounce = <T extends unknown[]>(props: UseDebounceProps<T>) => {
+type Result<T extends unknown[]> = [callback: (...args: T) => void, resetDebounce: () => void];
+
+export const useDebounce = <T extends unknown[]>(props: UseDebounceProps<T>): Result<T> => {
   const { callback, timeout } = props;
   const [debounceTimeoutId, setDebounceTimeoutId] = useState<Timeout>();
 
+  const resetDebounce = useCallback(() => {
+    if (debounceTimeoutId) {
+      clearTimeout(debounceTimeoutId);
+    }
+  }, [debounceTimeoutId]);
+
   const initiateCallback = useCallback(
     (...params: T) => {
-      if (debounceTimeoutId) {
-        clearTimeout(debounceTimeoutId);
-      }
+      resetDebounce();
 
       const timeoutId = setTimeout(() => {
         callback(...params);
@@ -22,8 +28,8 @@ export const useDebounce = <T extends unknown[]>(props: UseDebounceProps<T>) => 
 
       setDebounceTimeoutId(timeoutId);
     },
-    [callback, debounceTimeoutId, timeout],
+    [callback, resetDebounce, timeout],
   );
 
-  return [initiateCallback];
+  return [initiateCallback, resetDebounce];
 };

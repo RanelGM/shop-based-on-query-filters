@@ -28,7 +28,7 @@ export const Header = () => {
 
   const [_status, loadSimilar] = useAsyncDispatch({ onLoad: (searchValue: string) => loadSearchGuitars(searchValue) });
   // Использует задержку для введённого значения
-  const [debounceLoad] = useDebounce({ callback: (value: string) => loadSimilar(value), timeout: 300 });
+  const [debounceLoad, resetDebounce] = useDebounce({ callback: (value: string) => loadSimilar(value), timeout: 1000 });
   const dispatch = useDispatch();
 
   const resetSearch = useCallback(() => {
@@ -54,6 +54,7 @@ export const Header = () => {
       debounceLoad(value);
     } else {
       dispatch(setSearch(null));
+      resetDebounce();
     }
   };
 
