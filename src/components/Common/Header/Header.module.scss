@@ -112,7 +112,23 @@
   }
 
   .searchForm {
-    display: none;
+    flex-grow: 1;
+    margin-right: 12px;
+
+    input {
+      display: none;
+    }
+
+    &--show {
+      margin-left: 10px;
+
+      input {
+        display: initial;
+        min-height: auto;
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+    }
   }
 
   .cart {

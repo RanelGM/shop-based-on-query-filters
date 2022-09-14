@@ -1,16 +1,19 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { Guitar, Price } from "types/guitar";
-import { setGuitar, setGuitars, setPrice } from "./actions";
+import { Price } from "types/common";
+import { Guitar } from "types/guitar";
+import { setGuitar, setGuitars, setPrice, setSearch } from "./actions";
 
 type State = {
   guitars: Guitar[] | null;
   guitar: Guitar | null;
+  search: Guitar[] | null;
   price: Price;
 };
 
 export const initialState: State = {
   guitars: null,
   guitar: null,
+  search: null,
   price: {
     min: 0,
     max: 0,
@@ -24,6 +27,9 @@ export const guitarReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setGuitar, (state, action) => {
       state.guitar = action.payload;
+    })
+    .addCase(setSearch, (state, action) => {
+      state.search = action.payload;
     })
     .addCase(setPrice, (state, action) => {
       state.price = action.payload;

@@ -65,3 +65,43 @@ $transition: 0.3s ease;
     fill: var(--text-secondary);
   }
 }
+
+.optionsList {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+  width: 100%;
+  min-height: 100%;
+  max-height: 120px;
+  margin: 0;
+  padding: 4px $buttonHeight 4px 10px;
+  border: 1px solid var(--white);
+  border-radius: 4px;
+  background-color: var(--background-secondary);
+  color: var(--text-secondary);
+  list-style: none;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.optionLink {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-decoration: none;
+  text-transform: none;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus {
+    color: var(--text-hover);
+  }
+}

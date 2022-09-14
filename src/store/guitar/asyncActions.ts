@@ -1,7 +1,7 @@
 import { AsyncActionResult } from "store/store";
 import { setPaginationCount } from "store/ui/actions";
 import { Guitar } from "types/guitar";
-import { setGuitars, setPrice } from "./actions";
+import { setGuitars, setPrice, setSearch } from "./actions";
 import { APIRoute, MAX_GUITARS_FOR_PAGE, PAGINATION_COUNT_HEADER, Query, SortOrder, SortType } from "utils/constants";
 
 const getURLForMinMaxPrice = (search: URLSearchParams, order: SortOrder) => {
@@ -48,5 +48,12 @@ export const loadGuitars = (currentPage: number, searchParams: URLSearchParams):
     dispatch(setGuitars(data));
     dispatch(setPaginationCount(Math.ceil(guitarsCount / MAX_GUITARS_FOR_PAGE)));
     dispatch(setPrice({ min: minPrice, max: maxPrice }));
+  };
+};
+
+export const loadSearchGuitars = (searchValue: string): AsyncActionResult => {
+  return async (dispatch, _getState, axios) => {
+    const { data } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?name_like=${searchValue}`);
+    dispatch(setSearch(data));
   };
 };
