@@ -8,6 +8,7 @@ import { loadSearchGuitars } from "store/guitar/asyncActions";
 import { getSearchOptions } from "store/guitar/selectors";
 import { getCurrentViewport } from "store/ui/selectors";
 import { useAsyncDispatch } from "hooks/useAsyncDispatch";
+import { useDebounce } from "hooks/useDebounce";
 import { Icon } from "../Icon/Icon";
 import { Positioner } from "../Positioner/Positioner";
 import { SearchForm } from "../SearchForm/SearchForm";
@@ -26,6 +27,8 @@ export const Header = () => {
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
   const [_status, loadSimilar] = useAsyncDispatch({ onLoad: (searchValue: string) => loadSearchGuitars(searchValue) });
+  // Использует задержку для введённого значения
+  const [debounceLoad] = useDebounce({ callback: (value: string) => loadSimilar(value), timeout: 300 });
   const dispatch = useDispatch();
 
   const resetSearch = useCallback(() => {
@@ -48,7 +51,7 @@ export const Header = () => {
     const value = currentTarget.value;
 
     if (value) {
-      loadSimilar(value);
+      debounceLoad(value);
     } else {
       dispatch(setSearch(null));
     }
