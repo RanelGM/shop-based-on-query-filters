@@ -1,0 +1,101 @@
+@import "assets/styles/utils.scss";
+
+.component {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 430px;
+  padding: 20px 20px 20px 40px;
+  border-radius: 8px;
+  background-color: var(--background-primary);
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.heading {
+  margin: 0 0 15px;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 15px 0;
+}
+
+.text,
+.nameText,
+.priceText {
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.nameText {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.priceText {
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.infoWrapper {
+  display: flex;
+  margin-bottom: 20px;
+  column-gap: 35px;
+}
+
+.buttonAdd {
+  align-self: center;
+  min-height: 45px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  column-gap: 10px;
+
+  button {
+    width: calc(50% - 5px);
+    min-width: initial;
+    max-width: initial;
+    min-height: 45px;
+    font-size: 13px;
+  }
+}
+
+@include viewport-mobile {
+  .component {
+    width: 320px;
+    padding: 20px;
+  }
+
+  .infoWrapper {
+    column-gap: 10px;
+  }
+
+  .buttonsWrapper {
+    flex-direction: column;
+    row-gap: 10px;
+
+    button {
+      width: 100%;
+    }
+  }
+}
