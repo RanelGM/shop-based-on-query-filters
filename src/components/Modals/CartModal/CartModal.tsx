@@ -50,7 +50,9 @@ export const CartModal = (props: CartModalProps) => {
         ) : (
           <div className={style.buttonsWrapper}>
             <Button color="white-red">Удалить товар</Button>
-            <Button color="white-black">Продолжить покупки</Button>
+            <Button color="white-black" onClick={onModalClose}>
+              Продолжить покупки
+            </Button>
           </div>
         )}
       </div>

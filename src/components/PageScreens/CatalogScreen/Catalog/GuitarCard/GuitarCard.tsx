@@ -6,6 +6,7 @@ import { ButtonLink } from "components/Common/ButtonLink/ButtonLink";
 import { Icon } from "components/Common/Icon/Icon";
 import { RatingStars } from "components/Common/RatingStars/RatingStars";
 import { CartModal } from "components/Modals/CartModal/CartModal";
+import { CartModalSuccess } from "components/Modals/CartModalSuccess/CartModalSuccess";
 import { formatPrice } from "utils/utils";
 import style from "./GuitarCard.module.scss";
 
@@ -17,12 +18,17 @@ export const GuitarCard = ({ guitar }: GuitarCardProps) => {
   const { previewImg, rating, comments, name, price } = guitar;
 
   const modalAddRef = useRef<HTMLDivElement | null>(null);
+  const modalSuccessRef = useRef<HTMLDivElement | null>(null);
   const [isModalAddOpen, setIsModalAddOpen] = useModal({ componentRef: modalAddRef, isClickCapture: true });
+  const [isModalSuccessOpen, setIsModalSuccessOpen] = useModal({ componentRef: modalSuccessRef, isClickCapture: true });
 
   const onAddButtonClick = () => setIsModalAddOpen.openModal();
 
   return (
     <>
+      {isModalSuccessOpen && (
+        <CartModalSuccess componentRef={modalSuccessRef} onModalClose={setIsModalSuccessOpen.closeModal} />
+      )}
       {isModalAddOpen && (
         <CartModal
           componentRef={modalAddRef}
