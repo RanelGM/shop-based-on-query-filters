@@ -1,4 +1,6 @@
 import { MutableRefObject } from "react";
+import { useDispatch } from "react-redux";
+import { setCart } from "store/cart/actions";
 import { Guitar } from "types/guitar";
 import { Button } from "components/Common/Button/Button";
 import { ButtonClose } from "components/Common/Button/ButtonClose";
@@ -19,10 +21,15 @@ type CartModalProps = {
 export const CartModal = (props: CartModalProps) => {
   const { componentRef, guitar, modalType, onModalClose } = props;
   const { previewImg, name, vendorCode, type, stringCount, price } = guitar;
+  const dispatch = useDispatch();
 
   const isModalAdd = modalType === "add";
   const heading = isModalAdd ? "Добавить товар в корзину" : "Удалить этот товар?";
   const guitarType = GUITAR[type].label;
+
+  const onAddButtonClick = () => {
+    dispatch(setCart(guitar));
+  };
 
   return (
     <Overlay>
@@ -44,7 +51,7 @@ export const CartModal = (props: CartModalProps) => {
         </div>
 
         {isModalAdd ? (
-          <Button className={style.buttonAdd} color="red">
+          <Button className={style.buttonAdd} color="red" onClick={onAddButtonClick}>
             Добавить в корзину
           </Button>
         ) : (
