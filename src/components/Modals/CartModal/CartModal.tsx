@@ -16,10 +16,11 @@ type CartModalProps = {
   guitar: Guitar;
   modalType: ModalType;
   onModalClose: () => void;
+  onExtraModalOpen?: () => void;
 };
 
 export const CartModal = (props: CartModalProps) => {
-  const { componentRef, guitar, modalType, onModalClose } = props;
+  const { componentRef, guitar, modalType, onModalClose, onExtraModalOpen } = props;
   const { previewImg, name, vendorCode, type, stringCount, price } = guitar;
   const dispatch = useDispatch();
 
@@ -29,6 +30,12 @@ export const CartModal = (props: CartModalProps) => {
 
   const onAddButtonClick = () => {
     dispatch(setCart(guitar));
+
+    if (onExtraModalOpen) {
+      onExtraModalOpen();
+    }
+
+    onModalClose();
   };
 
   return (

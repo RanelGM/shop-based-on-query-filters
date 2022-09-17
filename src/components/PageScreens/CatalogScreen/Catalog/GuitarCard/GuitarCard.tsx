@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { getCart } from "store/cart/selectors";
 import useModal from "hooks/useModal";
 import { Guitar } from "types/guitar";
 import { Button } from "components/Common/Button/Button";
@@ -7,6 +9,7 @@ import { Icon } from "components/Common/Icon/Icon";
 import { RatingStars } from "components/Common/RatingStars/RatingStars";
 import { CartModal } from "components/Modals/CartModal/CartModal";
 import { CartModalSuccess } from "components/Modals/CartModalSuccess/CartModalSuccess";
+import { AppRoute } from "utils/constants";
 import { formatPrice } from "utils/utils";
 import style from "./GuitarCard.module.scss";
 
@@ -15,7 +18,9 @@ type GuitarCardProps = {
 };
 
 export const GuitarCard = ({ guitar }: GuitarCardProps) => {
-  const { previewImg, rating, comments, name, price } = guitar;
+  const { id, previewImg, rating, comments, name, price } = guitar;
+  const cart = useSelector(getCart);
+  const isGuitarInCart = cart.some((cartItem) => cartItem.id === id);
 
   const modalAddRef = useRef<HTMLDivElement | null>(null);
   const modalSuccessRef = useRef<HTMLDivElement | null>(null);
@@ -23,6 +28,7 @@ export const GuitarCard = ({ guitar }: GuitarCardProps) => {
   const [isModalSuccessOpen, setIsModalSuccessOpen] = useModal({ componentRef: modalSuccessRef, isClickCapture: true });
 
   const onAddButtonClick = () => setIsModalAddOpen.openModal();
+  const onModalSuccessOpen = () => setIsModalSuccessOpen.openModal();
 
   return (
     <>
@@ -35,6 +41,7 @@ export const GuitarCard = ({ guitar }: GuitarCardProps) => {
           guitar={guitar}
           modalType="add"
           onModalClose={setIsModalAddOpen.closeModal}
+          onExtraModalOpen={onModalSuccessOpen}
         />
       )}
 
@@ -52,9 +59,20 @@ export const GuitarCard = ({ guitar }: GuitarCardProps) => {
             <ButtonLink className={style.button} to={"#"}>
               Подробнее
             </ButtonLink>
-            <Button className={style.button} color="red" icon={<Icon iconName="cartAlt" />} onClick={onAddButtonClick}>
-              Купить
-            </Button>
+            {isGuitarInCart ? (
+              <ButtonLink to={AppRoute.Cart} className={style.button} color="white-red" icon={<Icon iconName="cart" />}>
+                В Корзине
+              </ButtonLink>
+            ) : (
+              <Button
+                className={style.button}
+                color="red"
+                icon={<Icon iconName="cartAlt" />}
+                onClick={onAddButtonClick}
+              >
+                Купить
+              </Button>
+            )}
           </div>
         </div>
       </div>

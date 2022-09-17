@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import cn from "classnames";
+import { getCartCount } from "store/cart/selectors";
 import { setSearch } from "store/guitar/actions";
 import { loadSearchGuitars } from "store/guitar/asyncActions";
 import { getSearchOptions } from "store/guitar/selectors";
@@ -22,6 +23,10 @@ export const Header = () => {
   const prevViewPortRef = useRef<Viewport>(currentViewport);
   const searchOptions = useSelector(getSearchOptions);
   const [isSearchInputShow, setIsSearchInputShow] = useState(!isMobileVp);
+
+  // Отражает общее количество товаров (в т.ч. сумму их amount)
+  const cartCount = useSelector(getCartCount);
+
   // На мобильном разрешении в случае, если открыто окно поиска, лого - не показывается
   const isLogoShow = !isSearchInputShow;
   const searchInputRef = useRef<HTMLInputElement | null>(null);
@@ -111,7 +116,8 @@ export const Header = () => {
 
           <Link className={style.cart} to={AppRoute.Cart}>
             <Icon className={style.cartIcon} iconName="cart" />
-            {/* <span className={style.cartCount}></span> */}
+
+            {cartCount > 0 && <span className={style.cartCount}>{cartCount}</span>}
           </Link>
         </Positioner>
       </header>

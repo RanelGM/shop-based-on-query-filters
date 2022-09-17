@@ -1,7 +1,6 @@
 import { MutableRefObject } from "react";
 import { Button } from "components/Common/Button/Button";
 import { ButtonLink } from "components/Common/ButtonLink/ButtonLink";
-import { Icon } from "components/Common/Icon/Icon";
 import { Overlay } from "components/Common/Overlay/Overlay";
 import { AppRoute } from "utils/constants";
 import style from "./CartModalSuccess.module.scss";

@@ -48,6 +48,12 @@
   padding: 2px 4px;
   font-size: 12px;
   line-height: 15px;
+  letter-spacing: initial;
+
+  svg {
+    width: 11px;
+    height: 11px;
+  }
 }
 
 @include viewport-mobile {
