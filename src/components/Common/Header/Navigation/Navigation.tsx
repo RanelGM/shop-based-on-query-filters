@@ -22,6 +22,12 @@ export const Navigation = () => {
     }
   }, [isMobileVp, isNavMenuOpen]);
 
+  const onNavButtonClick = () => {
+    if (isMobileVp) {
+      setIsNavMenuOpen(false);
+    }
+  };
+
   return (
     <div className={cn(style.component, isNavMenuOpen && style["component--open"])}>
       <button className={style.navButton} onClick={onNavMenuToggle}>
@@ -33,7 +39,7 @@ export const Navigation = () => {
         <ul className={style.navList}>
           {HEADER_NAV_LINKS.map((link) => (
             <li className={style.navItem} key={link.id}>
-              <NavLink className={style.navLink} to={link.path}>
+              <NavLink className={style.navLink} to={link.path} onClick={onNavButtonClick}>
                 {link.name}
               </NavLink>
             </li>
