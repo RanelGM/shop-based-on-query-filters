@@ -1,0 +1,102 @@
+.component {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonRemove {
+  align-self: flex-start;
+  margin: 0;
+}
+
+.image {
+  margin: 0 70px 0 25px;
+}
+
+.infoWrapper {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.info {
+  width: 65%;
+}
+
+.heading {
+  margin: 0 0 15px;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text {
+  margin: 0 0 5px;
+  font-size: 14px;
+  line-height: 15px;
+  letter-spacing: 0.05em;
+}
+
+.priceWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+.priceText {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.priceInputWrapper {
+  display: flex;
+  margin: 0 40px;
+}
+
+.priceButton,
+.priceInput {
+  width: 29px;
+  min-width: initial;
+  max-width: initial;
+  height: 29px;
+  border: 1px solid var(--border-input);
+  color: var(--border-input);
+  outline: none;
+}
+
+.priceButton {
+  font-size: 20px;
+
+  &:hover,
+  &:focus {
+    border-color: var(--border-input-focus);
+
+    &::before {
+      background-color: var(--text-secondary);
+    }
+  }
+
+  &--dec {
+    border-right: none;
+  }
+
+  &--inc {
+    border-left: none;
+  }
+}
+
+.priceInput {
+  text-align: center;
+
+  &:hover {
+    border-color: var(--border-input-hover);
+  }
+
+  &:focus {
+    border-color: var(--border-input-focus);
+  }
+}
