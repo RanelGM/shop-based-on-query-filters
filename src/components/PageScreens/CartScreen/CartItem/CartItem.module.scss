@@ -1,3 +1,5 @@
+@import "assets/styles/utils.scss";
+
 .component {
   display: flex;
   align-items: center;
@@ -52,6 +54,10 @@
   text-align: center;
 }
 
+.priceTextLabel {
+  display: none;
+}
+
 .priceInputWrapper {
   display: flex;
   margin: 0 40px;
@@ -98,5 +104,76 @@
 
   &:focus {
     border-color: var(--border-input-focus);
+  }
+}
+
+@include viewport-tablet {
+  .image {
+    margin: 0 25px;
+  }
+
+  .info {
+    width: 55%;
+    margin-right: 10px;
+  }
+
+  .priceInputWrapper {
+    margin: 0 15px;
+  }
+}
+
+@include viewport-mobile {
+  .heading {
+    margin: 0 0 10px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .image {
+    object-fit: contain;
+    width: 65px;
+    height: 170px;
+    margin: 0 8px;
+  }
+
+  .infoWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 225px;
+  }
+
+  .info {
+    width: 100%;
+    margin: 0 0 10px;
+  }
+
+  .priceWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .priceInputWrapper {
+    order: -1;
+    margin: 0;
+  }
+
+  .priceText {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+    line-height: 15px;
+  }
+
+  .priceTextLabel {
+    display: initial;
   }
 }

@@ -31,7 +31,10 @@ export const CartItem = ({ cartItem }: CartItemProps) => {
           </p>
         </div>
         <div className={style.priceWrapper}>
-          <p className={style.priceText}>{formatPrice(price)} ₽</p>
+          <p className={style.priceText}>
+            <span className={style.priceTextLabel}>Цена:</span>
+            <span>{formatPrice(price)} ₽</span>
+          </p>
           <div className={style.priceInputWrapper}>
             <Button className={cn(style.priceButton, style["priceButton--dec"])} color="white-red">
               –
@@ -41,7 +44,10 @@ export const CartItem = ({ cartItem }: CartItemProps) => {
               +
             </Button>
           </div>
-          <p className={style.priceText}>{formatPrice(totalPrice)} ₽</p>
+          <p className={style.priceText}>
+            <span className={style.priceTextLabel}>Сумма:</span>
+            <span>{formatPrice(totalPrice)} ₽</span>
+          </p>
         </div>
       </div>
     </div>
