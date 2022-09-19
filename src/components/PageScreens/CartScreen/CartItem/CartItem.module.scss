@@ -22,7 +22,7 @@
 }
 
 .info {
-  width: 65%;
+  width: 55%;
 }
 
 .heading {
@@ -96,6 +96,8 @@
 }
 
 .priceInput {
+  @extend %hide-arrows;
+
   text-align: center;
 
   &:hover {
@@ -113,7 +115,6 @@
   }
 
   .info {
-    width: 55%;
     margin-right: 10px;
   }
 

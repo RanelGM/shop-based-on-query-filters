@@ -1,6 +1,6 @@
 import { MutableRefObject } from "react";
 import { useDispatch } from "react-redux";
-import { setCart } from "store/cart/actions";
+import { setGuitarInCart } from "store/cart/actions";
 import { Guitar } from "types/guitar";
 import { Button } from "components/Common/Button/Button";
 import { ButtonClose } from "components/Common/Button/ButtonClose";
@@ -29,7 +29,7 @@ export const CartModal = (props: CartModalProps) => {
   const guitarType = GUITAR[type].label;
 
   const onAddButtonClick = () => {
-    dispatch(setCart(guitar));
+    dispatch(setGuitarInCart(guitar));
 
     if (onExtraModalOpen) {
       onExtraModalOpen();

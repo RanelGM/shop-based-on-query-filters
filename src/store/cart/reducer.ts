@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { CartItem } from "types/cart";
-import { setCart, removeFromCart } from "./actions";
+import { setGuitarInCart, removeFromCart, setCartItem } from "./actions";
 import { getLocalStorageCart, setLocalStorageCart } from "./localStorage";
 
 type State = {
@@ -14,7 +14,8 @@ export const initialState: State = {
 
 export const cartReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(setCart, (state, action) => {
+    .addCase(setGuitarInCart, (state, action) => {
+      // Используется для добавления гитар в корзину
       let cart = state.cart;
       const guitar = action.payload;
 
@@ -40,6 +41,16 @@ export const cartReducer = createReducer(initialState, (builder) => {
 
       state.cart = cart;
       setLocalStorageCart(cart);
+    })
+    .addCase(setCartItem, (state, action) => {
+      // Используетя для кнопок инкремента и декремента
+      const index = state.cart.findIndex((gutiarInCart) => gutiarInCart.id === action.payload.id);
+
+      if (index < 0) {
+        state.cart = [...state.cart, action.payload];
+      } else {
+        state.cart = [...state.cart.slice(0, index), action.payload, ...state.cart.slice(index + 1)];
+      }
     })
     .addCase(removeFromCart, (state, action) => {
       const cart = state.cart;

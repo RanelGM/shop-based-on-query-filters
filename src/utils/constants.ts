@@ -108,3 +108,5 @@ export const ALL_GUITAR_STRINGS = Array.from(
 export const MAX_GUITARS_FOR_PAGE = 9;
 export const MAX_PAGINATION_COUNT = 3;
 export const PAGINATION_COUNT_HEADER = "x-total-count";
+export const MAX_CART_COUNT = 99;
+export const MIN_CART_COUNT = 1;

@@ -108,14 +108,14 @@
 %hide-arrows {
   // Скрывает стрелки у input type number
   /* Chrome, Safari, Edge, Opera */
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
     margin: 0;
     appearance: none;
   }
 
   /* Firefox */
-  input[type="number"] {
+  &[type="number"] {
     appearance: textfield;
   }
 }

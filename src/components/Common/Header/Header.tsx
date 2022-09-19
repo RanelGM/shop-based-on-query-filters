@@ -26,6 +26,7 @@ export const Header = () => {
 
   // Отражает общее количество товаров (в т.ч. сумму их amount)
   const cartCount = useSelector(getCartCount);
+  const isCartCountShow = cartCount > 0;
 
   // На мобильном разрешении в случае, если открыто окно поиска, лого - не показывается
   const isLogoShow = !isSearchInputShow;
@@ -117,7 +118,7 @@ export const Header = () => {
           <Link className={style.cart} to={AppRoute.Cart}>
             <Icon className={style.cartIcon} iconName="cart" />
 
-            {cartCount > 0 && <span className={style.cartCount}>{cartCount}</span>}
+            {isCartCountShow && <span className={style.cartCount}>{cartCount > 99 ? "99+" : cartCount}</span>}
           </Link>
         </Positioner>
       </header>

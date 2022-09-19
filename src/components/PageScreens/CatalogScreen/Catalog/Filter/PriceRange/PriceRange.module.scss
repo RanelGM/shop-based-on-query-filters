@@ -19,7 +19,9 @@
 }
 
 .inputWrapper {
-  @extend %hide-arrows;
-
   max-width: 84px;
+
+  input {
+    @extend %hide-arrows;
+  }
 }

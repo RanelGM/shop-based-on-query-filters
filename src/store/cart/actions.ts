@@ -1,10 +1,13 @@
 import { createAction } from "@reduxjs/toolkit";
+import { CartItem } from "types/cart";
 import { Guitar } from "types/guitar";
 
 enum ActionType {
-  SetCart = "cart/setCart",
+  SetGuitarInCart = "cart/setGuitarInCart",
+  SetCartItem = "cart/setCartItem",
   RemoveFromCart = "cart/removeFromCart",
 }
 
-export const setCart = createAction(ActionType.SetCart, (guitar: Guitar) => ({ payload: guitar }));
+export const setGuitarInCart = createAction(ActionType.SetGuitarInCart, (guitar: Guitar) => ({ payload: guitar }));
+export const setCartItem = createAction(ActionType.SetCartItem, (cartItem: CartItem) => ({ payload: cartItem }));
 export const removeFromCart = createAction(ActionType.RemoveFromCart, (id: Guitar["id"]) => ({ payload: id }));
