@@ -44,20 +44,26 @@ export const cartReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCartItem, (state, action) => {
       // Используетя для кнопок инкремента и декремента
+      let cart = state.cart;
       const index = state.cart.findIndex((gutiarInCart) => gutiarInCart.id === action.payload.id);
 
       if (index < 0) {
-        state.cart = [...state.cart, action.payload];
+        cart = [...state.cart, action.payload];
       } else {
-        state.cart = [...state.cart.slice(0, index), action.payload, ...state.cart.slice(index + 1)];
+        cart = [...state.cart.slice(0, index), action.payload, ...state.cart.slice(index + 1)];
       }
+
+      state.cart = cart;
+      setLocalStorageCart(cart);
     })
     .addCase(removeFromCart, (state, action) => {
-      const cart = state.cart;
+      let cart = state.cart;
       const index = cart.findIndex((cartItem) => cartItem.id === action.payload);
 
       if (index >= 0) {
-        state.cart = [...cart.slice(0, index), ...cart.slice(index + 1)];
+        cart = [...cart.slice(0, index), ...cart.slice(index + 1)];
+        state.cart = cart;
+        setLocalStorageCart(cart);
       }
     });
 });
