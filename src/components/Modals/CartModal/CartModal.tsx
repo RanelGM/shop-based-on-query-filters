@@ -1,6 +1,6 @@
 import { MutableRefObject } from "react";
 import { useDispatch } from "react-redux";
-import { setGuitarInCart } from "store/cart/actions";
+import { removeFromCart, setGuitarInCart } from "store/cart/actions";
 import { Guitar } from "types/guitar";
 import { Button } from "components/Common/Button/Button";
 import { ButtonClose } from "components/Common/Button/ButtonClose";
@@ -9,7 +9,7 @@ import { GUITAR } from "utils/constants";
 import { formatPrice } from "utils/utils";
 import style from "./CartModal.module.scss";
 
-type ModalType = "add" | "delete";
+type ModalType = "add" | "remove";
 
 type CartModalProps = {
   componentRef: MutableRefObject<HTMLDivElement | null>;
@@ -21,7 +21,7 @@ type CartModalProps = {
 
 export const CartModal = (props: CartModalProps) => {
   const { componentRef, guitar, modalType, onModalClose, onExtraModalOpen } = props;
-  const { previewImg, name, vendorCode, type, stringCount, price } = guitar;
+  const { id, previewImg, name, vendorCode, type, stringCount, price } = guitar;
   const dispatch = useDispatch();
 
   const isModalAdd = modalType === "add";
@@ -35,6 +35,11 @@ export const CartModal = (props: CartModalProps) => {
       onExtraModalOpen();
     }
 
+    onModalClose();
+  };
+
+  const onRemoveButtonClick = () => {
+    dispatch(removeFromCart(id));
     onModalClose();
   };
 
@@ -63,7 +68,9 @@ export const CartModal = (props: CartModalProps) => {
           </Button>
         ) : (
           <div className={style.buttonsWrapper}>
-            <Button color="white-red">Удалить товар</Button>
+            <Button color="white-red" onClick={onRemoveButtonClick}>
+              Удалить товар
+            </Button>
             <Button color="white-black" onClick={onModalClose}>
               Продолжить покупки
             </Button>
