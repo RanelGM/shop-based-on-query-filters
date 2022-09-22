@@ -1,3 +1,5 @@
+@import "assets/styles/utils.scss";
+
 .heading {
   margin: 0 0 20px;
   font-size: 22px;
@@ -5,7 +7,7 @@
 }
 
 .cartList {
-  margin: 0;
+  margin: 0 0 40px;
   padding: 0;
   list-style: none;
 }
@@ -15,4 +17,58 @@
   align-items: flex-start;
   padding: 20px 0;
   border-top: 1px solid var(--gray-4);
+
+  &:last-child {
+    border-bottom: 1px solid var(--gray-4);
+  }
+}
+
+.totalWrapper {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
+.priceWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  min-width: 220px;
+
+  p {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    column-gap: 15px;
+  }
+
+  span:first-child {
+    font-weight: bold;
+  }
+}
+
+.submitButton {
+  width: 100%;
+  min-width: initial;
+  max-width: initial;
+  margin-top: 10px;
+}
+
+@include viewport-mobile {
+  .totalWrapper {
+    flex-direction: column;
+    row-gap: 20px;
+  }
+
+  .priceWrapper {
+    row-gap: 5px;
+
+    p {
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+  }
 }

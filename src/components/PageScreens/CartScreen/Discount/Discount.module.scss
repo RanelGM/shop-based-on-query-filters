@@ -1,0 +1,67 @@
+@import "assets/styles/utils.scss";
+
+.component {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.heading {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+}
+
+.text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+}
+
+.controlsWrapper {
+  display: flex;
+  margin: 10px 0 0;
+  column-gap: 20px;
+}
+
+.inputWrapper,
+.button {
+  width: calc(50% - 10px);
+  min-width: initial;
+  max-width: 100%;
+  height: 38px;
+}
+
+.inputWrapper input {
+  height: 100%;
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 15px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+
+  &::placeholder {
+    letter-spacing: 0;
+    text-transform: none;
+  }
+}
+
+@include viewport-mobile {
+  .heading {
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+
+  .text {
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .inputWrapper input,
+  .button {
+    font-size: 14px;
+  }
+}
