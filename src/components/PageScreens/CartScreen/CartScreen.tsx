@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
-import { getCart } from "store/cart/selectors";
+import cn from "classnames";
+import { getCart, getDiscount } from "store/cart/selectors";
 import { Button } from "components/Common/Button/Button";
 import { Positioner } from "components/Common/Positioner/Positioner";
 import { CartItem } from "./CartItem/CartItem";
@@ -9,7 +10,9 @@ import style from "./CartScreen.module.scss";
 
 export const CartScreen = () => {
   const cart = useSelector(getCart);
-  const totalAmount = cart.reduce((accum, cartItem) => (accum += cartItem.amount * cartItem.price), 0);
+  const { discount } = useSelector(getDiscount);
+  const totalPrice = cart.reduce((accum, cartItem) => (accum += cartItem.amount * cartItem.price), 0);
+  const discountPrice = (totalPrice * discount) / 100;
 
   return (
     <Positioner>
@@ -27,14 +30,14 @@ export const CartScreen = () => {
           <div className={style.totalWrapper}>
             <Discount />
             <div className={style.priceWrapper}>
-              <p>
-                <span>Всего:</span> <span>{formatPrice(totalAmount)} ₽</span>
+              <p className={style.price}>
+                <b>Всего:</b> <span>{formatPrice(totalPrice)} ₽</span>
               </p>
-              <p>
-                <span>Скидка:</span> <span>{formatPrice(0)} ₽</span>
+              <p className={cn(style.price, discount > 0 && style["price--discount"])}>
+                <b>Скидка:</b> <span>{formatPrice(discountPrice)} ₽</span>
               </p>
-              <p>
-                <span>К оплате:</span> <b>{formatPrice(100)} ₽</b>
+              <p className={style.price}>
+                <b>К оплате:</b> <b>{formatPrice(totalPrice - discountPrice)} ₽</b>
               </p>
               <Button color="red" className={style.submitButton}>
                 Оформить заказ

@@ -1,15 +1,23 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { CartItem } from "types/cart";
-import { setGuitarInCart, removeFromCart, setCartItem } from "./actions";
-import { getLocalStorageCart, setLocalStorageCart } from "./localStorage";
+import { CartItem, Discount } from "types/cart";
+import { setGuitarInCart, removeFromCart, setCartItem, setDiscount } from "./actions";
+import { getLocalStorageCart, getLocalStorageDiscount, setLocalStorageCart } from "./localStorage";
 
 type State = {
   cart: CartItem[];
+  discount: Discount;
+};
+
+const discountInitalState: Discount = {
+  coupon: "",
+  discount: 0,
 };
 
 export const initialState: State = {
-  // Сохранение корзины на сервере не предполагается, поэтому сохраняется в localStorage в редьюсере
+  // Сохранение корзины на сервере не предполагается, сохраняется в localStorage
+  // Корзина - в редьюсере, Дисконт - в asyncActions
   cart: getLocalStorageCart() || [],
+  discount: getLocalStorageDiscount() || discountInitalState,
 };
 
 export const cartReducer = createReducer(initialState, (builder) => {
@@ -65,5 +73,8 @@ export const cartReducer = createReducer(initialState, (builder) => {
         state.cart = cart;
         setLocalStorageCart(cart);
       }
+    })
+    .addCase(setDiscount, (state, action) => {
+      state.discount = action.payload;
     });
 });

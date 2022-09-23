@@ -9,6 +9,7 @@ export enum AppRoute {
 
 export enum APIRoute {
   Guitars = "/guitars",
+  Coupons = "/coupons",
 }
 
 export enum Query {

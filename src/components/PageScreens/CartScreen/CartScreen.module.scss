@@ -34,19 +34,19 @@
   flex-direction: column;
   row-gap: 10px;
   min-width: 220px;
+}
 
-  p {
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-    font-size: 20px;
-    line-height: 1.2;
-    letter-spacing: 0.05em;
-    column-gap: 15px;
-  }
+.price {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  column-gap: 15px;
 
-  span:first-child {
-    font-weight: bold;
+  &--discount span {
+    color: var(--red);
   }
 }
 
@@ -65,10 +65,10 @@
 
   .priceWrapper {
     row-gap: 5px;
+  }
 
-    p {
-      font-size: 16px;
-      letter-spacing: 0;
-    }
+  .price {
+    font-size: 16px;
+    letter-spacing: 0;
   }
 }
