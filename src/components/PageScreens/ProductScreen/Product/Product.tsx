@@ -1,11 +1,13 @@
-import { MouseEvent, useRef, useState } from "react";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import cn from "classnames";
 import useModal from "hooks/useModal";
 import { Guitar } from "types/guitar";
 import { Button } from "components/Common/Button/Button";
 import { RatingStars } from "components/Common/RatingStars/RatingStars";
 import { CartModal } from "components/Modals/CartModal/CartModal";
-import { GUITAR } from "utils/constants";
+import { CartModalSuccess } from "components/Modals/CartModalSuccess/CartModalSuccess";
+import { AppRoute, GUITAR } from "utils/constants";
 import { formatPrice } from "utils/utils";
 import style from "./Product.module.scss";
 
@@ -13,36 +15,34 @@ type ProductProps = {
   guitar: Guitar;
 };
 
-enum Tab {
-  Characteristics = "Характеристики",
-  Description = "Описание",
-}
-
 export const Product = ({ guitar }: ProductProps) => {
-  const { id, previewImg, rating, comments, name, vendorCode, type, stringCount, description, price } = guitar;
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.Characteristics);
+  const { previewImg, rating, comments, name, vendorCode, type, stringCount, description, price } = guitar;
   const guitarType = GUITAR[type].label;
 
+  const navigateTo = useNavigate();
   const modalAddRef = useRef<HTMLDivElement | null>(null);
+  const modalSuccessRef = useRef<HTMLDivElement | null>(null);
   const [isModalAddOpen, modalAddCallbacks] = useModal({ componentRef: modalAddRef, isClickCapture: true });
+  const [isModalSuccessOpen, setIsModalSuccessOpen] = useModal({ componentRef: modalSuccessRef, isClickCapture: true });
 
-  const onTabButtonClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
-    setActiveTab(currentTarget.id as Tab);
-    currentTarget.blur();
-  };
-
-  const onAddButtonClick = () => {
-    modalAddCallbacks.openModal();
+  const onAddButtonClick = () => modalAddCallbacks.openModal();
+  const onModalSuccessOpen = () => setIsModalSuccessOpen.openModal();
+  const onModalSuccessClose = () => {
+    setIsModalSuccessOpen.closeModal();
+    navigateTo(`${AppRoute.Catalog}/1`);
   };
 
   return (
     <>
+      {isModalSuccessOpen && <CartModalSuccess componentRef={modalSuccessRef} onModalClose={onModalSuccessClose} />}
+
       {isModalAddOpen && (
         <CartModal
           componentRef={modalAddRef}
-          onModalClose={modalAddCallbacks.closeModal}
-          guitar={guitar}
           modalType="add"
+          guitar={guitar}
+          onModalClose={modalAddCallbacks.closeModal}
+          onExtraModalOpen={onModalSuccessOpen}
         />
       )}
 
