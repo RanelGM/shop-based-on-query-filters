@@ -10,6 +10,7 @@ import { CartScreen } from "components/PageScreens/CartScreen/CartScreen";
 import { CatalogScreen } from "components/PageScreens/CatalogScreen/CatalogScreen";
 import { MainScreen } from "components/PageScreens/MainScreen/MainScreen";
 import { NotFoundScreen } from "components/PageScreens/NotFoundScreen/NotFoundScreen";
+import { ProductScreen } from "components/PageScreens/ProductScreen/ProductScreen";
 import { AppRoute } from "utils/constants";
 import { checkViewport } from "utils/utils";
 import style from "./App.module.scss";
@@ -17,6 +18,7 @@ import style from "./App.module.scss";
 const APP_ROUTES = [
   { path: AppRoute.Main, element: <MainScreen /> },
   { path: `${AppRoute.Catalog}/:page`, element: <CatalogScreen /> },
+  { path: `${AppRoute.Product}/:id`, element: <ProductScreen /> },
   { path: AppRoute.Cart, element: <CartScreen /> },
   { path: "*", element: <NotFoundScreen /> },
 ];

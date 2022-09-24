@@ -56,7 +56,7 @@ export const GuitarCard = ({ guitar }: GuitarCardProps) => {
           </div>
 
           <div className={style.buttonsWrapper}>
-            <ButtonLink className={style.button} to={"#"}>
+            <ButtonLink className={style.button} to={`${AppRoute.Product}/${id}`}>
               Подробнее
             </ButtonLink>
             {isGuitarInCart ? (
