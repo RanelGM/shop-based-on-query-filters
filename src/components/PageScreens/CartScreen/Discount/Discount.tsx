@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import cn from "classnames";
 import { setDiscount } from "store/cart/actions";
 import { loadDiscount } from "store/cart/asyncActions";
+import { setLocalStorageDiscount } from "store/cart/localStorage";
 import { getDiscount } from "store/cart/selectors";
 import { useAsyncDispatch } from "hooks/useAsyncDispatch";
 import { Button } from "components/Common/Button/Button";
@@ -17,6 +18,7 @@ export const Discount = () => {
 
   const resetDiscount = () => {
     dispatch(setDiscount({ coupon: "", discount: 0 }));
+    setLocalStorageDiscount({ coupon: "", discount: 0 });
   };
 
   const [status, load, resetStatus] = useAsyncDispatch({

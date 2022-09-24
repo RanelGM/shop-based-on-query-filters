@@ -49,7 +49,7 @@ export enum GuitarType {
 }
 
 export const HEADER_NAV_LINKS = [
-  { id: "1", name: "Каталог", path: AppRoute.Catalog },
+  { id: "1", name: "Каталог", path: `${AppRoute.Catalog}/1` },
   { id: "2", name: "Наши магазины", path: AppRoute.Shops },
   { id: "3", name: "О компании", path: AppRoute.About },
 ] as const;
@@ -58,6 +58,7 @@ export const FOOTER_NAV_LINKS = [
   { id: "1", name: "Каталог", path: AppRoute.Catalog },
   { id: "2", name: "Наши магазины", path: AppRoute.Shops },
   { id: "3", name: "О компании", path: AppRoute.About },
+  { id: "4", name: "Корзина", path: AppRoute.Cart },
 ] as const;
 
 export const FOOTER_CONTACT_LINKS = [
