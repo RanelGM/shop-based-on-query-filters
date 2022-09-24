@@ -1,6 +1,7 @@
 import { RootReducerState } from "store/store";
 import { Price, Option } from "types/common";
 import { Guitar } from "types/guitar";
+import { AppRoute } from "utils/constants";
 
 export const getGuitars = (state: RootReducerState): Guitar[] | null => state.guitar.guitars;
 
@@ -30,5 +31,5 @@ export const getSearchOptions = (state: RootReducerState): Option[] | null => {
     return null;
   }
 
-  return searchGuitars.map((guitar) => ({ id: `${guitar.id}`, value: guitar.name }));
+  return searchGuitars.map((guitar) => ({ id: `${AppRoute.Product}/${guitar.id}`, value: guitar.name }));
 };
