@@ -6,6 +6,7 @@ import { getGuitar } from "store/guitar/selectors";
 import { useAsyncDispatch } from "hooks/useAsyncDispatch";
 import { Loader } from "components/Common/Loader/Loader";
 import { Positioner } from "components/Common/Positioner/Positioner";
+import { Product } from "./Product/Product";
 import style from "./ProductScreen.module.scss";
 
 export const ProductScreen = () => {
@@ -28,7 +29,7 @@ export const ProductScreen = () => {
 
       <h1 className={style.heading}>Товар</h1>
 
-      <>{status.isSuccess && guitar && <div></div>}</>
+      <>{status.isSuccess && guitar && <Product guitar={guitar} />}</>
     </Positioner>
   );
 };
