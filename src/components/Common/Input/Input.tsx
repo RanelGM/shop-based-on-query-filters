@@ -6,11 +6,12 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   id: string;
   className?: string;
   label?: string;
+  message?: string;
   forwardRef?: MutableRefObject<HTMLInputElement | null>;
 };
 
 export const Input = (props: InputProps) => {
-  const { id, className, label, forwardRef, ...rest } = props;
+  const { id, className, message, label, forwardRef, ...rest } = props;
 
   return (
     <div className={cn(style.component, className)}>
@@ -21,6 +22,8 @@ export const Input = (props: InputProps) => {
       )}
 
       <input id={id} className={style.input} {...rest} ref={forwardRef} />
+
+      {message && <p className={style.message}>{message}</p>}
     </div>
   );
 };
