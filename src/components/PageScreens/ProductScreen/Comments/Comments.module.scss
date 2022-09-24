@@ -1,6 +1,8 @@
 @import "assets/styles/utils.scss";
 
 .component {
+  display: flex;
+  flex-direction: column;
   margin-top: 40px;
   padding-top: 40px;
   border-top: 1px solid var(--gray-4);
@@ -68,6 +70,13 @@
   }
 }
 
+.buttonShow {
+  align-self: center;
+  min-width: 280px;
+  max-width: none;
+  margin-top: 25px;
+}
+
 @include viewport-mobile {
   .component {
     margin-top: 15px;
@@ -81,5 +90,9 @@
     button {
       max-width: none;
     }
+  }
+
+  .buttonShow {
+    width: 100%;
   }
 }

@@ -1,6 +1,8 @@
+import { MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { UserComment } from "types/guitar";
 import { Button } from "components/Common/Button/Button";
 import { RatingStars } from "components/Common/RatingStars/RatingStars";
+import { COMMENTS_COUNT_STEP } from "utils/constants";
 import { formatDate } from "utils/utils";
 import style from "./Comments.module.scss";
 
@@ -9,6 +11,19 @@ type CommentsProps = {
 };
 
 export const Comments = ({ comments }: CommentsProps) => {
+  const [commentsCount, setCommentsCount] = useState<number>(COMMENTS_COUNT_STEP);
+
+  const commentsToShow = useMemo(() => comments.slice(0, commentsCount), [comments, commentsCount]);
+  const isButtonShowShow = commentsCount < comments.length;
+
+  const onButtonShowClick = ({ currentTarget }: MouseEvent<HTMLButtonElement>) => {
+    const newCommentsCount =
+      commentsCount + COMMENTS_COUNT_STEP <= comments.length ? commentsCount + COMMENTS_COUNT_STEP : comments.length;
+
+    setCommentsCount(newCommentsCount);
+    currentTarget.blur();
+  };
+
   return (
     <div className={style.component}>
       <div className={style.headingWrapper}>
@@ -17,7 +32,7 @@ export const Comments = ({ comments }: CommentsProps) => {
       </div>
 
       <ul className={style.commentList}>
-        {comments.map((item) => {
+        {commentsToShow.map((item) => {
           const { id, userName, createAt, rating, advantage, disadvantage, comment } = item;
 
           return (
@@ -45,6 +60,12 @@ export const Comments = ({ comments }: CommentsProps) => {
           );
         })}
       </ul>
+
+      {isButtonShowShow && (
+        <Button className={style.buttonShow} onClick={onButtonShowClick}>
+          Показать ещё отзывы
+        </Button>
+      )}
     </div>
   );
 };

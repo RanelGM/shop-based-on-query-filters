@@ -112,3 +112,4 @@ export const MAX_PAGINATION_COUNT = 3;
 export const PAGINATION_COUNT_HEADER = "x-total-count";
 export const MAX_CART_COUNT = 99;
 export const MIN_CART_COUNT = 1;
+export const COMMENTS_COUNT_STEP = 3;
