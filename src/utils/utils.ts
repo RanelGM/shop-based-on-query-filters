@@ -19,6 +19,19 @@ export const formatPrice = (price: number) => {
   return `${price.toLocaleString("ru")}`;
 };
 
+export const formatDate = (isoDate: string): string => {
+  const date = new Date(isoDate);
+
+  if (date instanceof Date && !isNaN(date.valueOf())) {
+    return date.toLocaleDateString("ru", {
+      day: "numeric",
+      month: "long",
+    });
+  }
+
+  return "";
+};
+
 export const updateArray = <T>(array: T[], item: T): T[] => {
   // Обновляет копию массива. Если элемента нет внутри массива, то добавляет. Если есть, то удаляет
   const updatingArray = array.slice();

@@ -6,6 +6,7 @@ import { getGuitar } from "store/guitar/selectors";
 import { useAsyncDispatch } from "hooks/useAsyncDispatch";
 import { Loader } from "components/Common/Loader/Loader";
 import { Positioner } from "components/Common/Positioner/Positioner";
+import { Comments } from "./Comments/Comments";
 import { Product } from "./Product/Product";
 import style from "./ProductScreen.module.scss";
 
@@ -29,7 +30,14 @@ export const ProductScreen = () => {
 
       <h1 className={style.heading}>Товар</h1>
 
-      <>{status.isSuccess && guitar && <Product guitar={guitar} />}</>
+      <>
+        {status.isSuccess && guitar && (
+          <>
+            <Product guitar={guitar} />
+            <Comments comments={guitar.comments} />
+          </>
+        )}
+      </>
     </Positioner>
   );
 };

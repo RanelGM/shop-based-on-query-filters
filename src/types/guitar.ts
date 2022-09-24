@@ -1,6 +1,6 @@
 import { GuitarType } from "utils/constants";
 
-type UserComment = {
+export type UserComment = {
   id: string;
   userName: string;
   advantage: string;
