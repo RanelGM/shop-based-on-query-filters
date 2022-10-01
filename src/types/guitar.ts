@@ -1,14 +1,17 @@
 import { GuitarType } from "utils/constants";
 
-export type UserComment = {
-  id: string;
+export type CommentToServer = {
   userName: string;
   advantage: string;
   disadvantage: string;
   comment: string;
   rating: number;
-  createAt: string;
   guitarId: number;
+};
+
+export type UserComment = CommentToServer & {
+  id: string;
+  createAt: string;
 };
 
 export type Guitar = {

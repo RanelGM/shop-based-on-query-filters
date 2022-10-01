@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { MouseEvent, useMemo, useRef, useState } from "react";
 import useModal from "hooks/useModal";
 import { UserComment } from "types/guitar";
 import { Button } from "components/Common/Button/Button";

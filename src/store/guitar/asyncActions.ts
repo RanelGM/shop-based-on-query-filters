@@ -1,6 +1,6 @@
 import { AsyncActionResult } from "store/store";
 import { setPaginationCount } from "store/ui/actions";
-import { Guitar } from "types/guitar";
+import { CommentToServer, Guitar, UserComment } from "types/guitar";
 import { setGuitar, setGuitars, setPrice, setSearch } from "./actions";
 import { APIRoute, MAX_GUITARS_FOR_PAGE, PAGINATION_COUNT_HEADER, Query, SortOrder, SortType } from "utils/constants";
 
@@ -62,5 +62,20 @@ export const loadSearchGuitars = (searchValue: string): AsyncActionResult => {
   return async (dispatch, _getState, axios) => {
     const { data } = await axios.get<Guitar[]>(`${APIRoute.Guitars}?name_like=${searchValue}`);
     dispatch(setSearch(data));
+  };
+};
+
+export const postComment = (comment: CommentToServer): AsyncActionResult => {
+  return async (dispatch, getState, axios) => {
+    const guitar = getState().guitar.guitar;
+
+    if (!guitar) {
+      return;
+    }
+
+    const { data } = await axios.post<UserComment>(APIRoute.Comments, comment);
+
+    const updatedGuitar = { ...guitar, comments: [...guitar.comments, data] };
+    dispatch(setGuitar(updatedGuitar));
   };
 };
