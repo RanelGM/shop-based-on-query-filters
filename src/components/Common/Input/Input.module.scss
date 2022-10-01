@@ -8,12 +8,22 @@
 }
 
 .label {
+  position: relative;
   margin-bottom: 3px;
   color: var(--text-primary);
   font-size: 16px;
   line-height: 19px;
 }
 
+.required {
+  position: absolute;
+  margin-left: 5px;
+  color: var(--red);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.textarea,
 .input {
   width: 100%;
   padding: 5px;
@@ -37,6 +47,10 @@
     background-color: var(--background-disabled);
     pointer-events: none;
   }
+}
+
+.textarea {
+  resize: none;
 }
 
 .message {

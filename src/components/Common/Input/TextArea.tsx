@@ -1,18 +1,18 @@
-import { InputHTMLAttributes, MutableRefObject, RefCallback } from "react";
+import { MutableRefObject, RefCallback, TextareaHTMLAttributes } from "react";
 import cn from "classnames";
 import style from "./Input.module.scss";
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
   id: string;
   className?: string;
   label?: string;
   labelRequired?: boolean;
   message?: string;
-  forwardRef?: MutableRefObject<HTMLInputElement | null> | RefCallback<HTMLInputElement>;
+  forwardRef?: MutableRefObject<HTMLTextAreaElement | null> | RefCallback<HTMLTextAreaElement>;
 };
 
-export const Input = (props: InputProps) => {
-  const { id, className, message, label, labelRequired, forwardRef, ...rest } = props;
+export const TextArea = (props: TextAreaProps) => {
+  const { id, className, message, label, labelRequired, forwardRef, rows = 3, ...rest } = props;
 
   return (
     <div className={cn(style.component, className)}>
@@ -23,7 +23,7 @@ export const Input = (props: InputProps) => {
         </label>
       )}
 
-      <input id={id} className={style.input} {...rest} ref={forwardRef} />
+      <textarea id={id} className={style.textarea} rows={rows} {...rest} ref={forwardRef} />
 
       {message && <p className={style.message}>{message}</p>}
     </div>

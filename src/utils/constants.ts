@@ -48,6 +48,14 @@ export enum GuitarType {
   Ukulele = "ukulele",
 }
 
+export enum CommentForm {
+  Name = "name",
+  Rating = "rating",
+  Advantage = "advantage",
+  Disadvantage = "disadvantage",
+  Comment = "comment",
+}
+
 export const HEADER_NAV_LINKS = [
   { id: "1", name: "Каталог", path: `${AppRoute.Catalog}/1` },
   { id: "2", name: "Наши магазины", path: AppRoute.Shops },
