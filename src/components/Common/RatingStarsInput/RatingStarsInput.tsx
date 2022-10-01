@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, MutableRefObject, RefCallback, useState } from "react";
+import { InputHTMLAttributes, KeyboardEvent, MutableRefObject, RefCallback, useState } from "react";
 import cn from "classnames";
 import { Icon } from "../Icon/Icon";
 import style from "./RatingStarsInput.module.scss";
@@ -21,11 +21,19 @@ export const InputStars = (props: InputStarsProps) => {
 
   const [rating, setRating] = useState(0);
 
-  const onIconClick = (starIndex: number) => {
-    setRating(starIndex + 1);
+  const updateRating = (newRating: number) => {
+    setRating(newRating);
 
     if (onRatingChange) {
-      onRatingChange(starIndex + 1);
+      onRatingChange(newRating);
+    }
+  };
+
+  const onIconClick = (newRating: number) => updateRating(newRating);
+
+  const onIconKeydown = (evt: KeyboardEvent<HTMLOrSVGElement>, newRating: number) => {
+    if (evt.key === "Enter") {
+      updateRating(newRating);
     }
   };
 
@@ -43,9 +51,11 @@ export const InputStars = (props: InputStarsProps) => {
           <Icon
             className={style.icon}
             key={index}
+            tabIndex={0}
             iconName={rating >= index + 1 ? "star" : "starEmpty"}
             style={{ width: width, height: height }}
-            onClick={() => onIconClick(index)}
+            onClick={() => onIconClick(index + 1)}
+            onKeyDown={(evt) => onIconKeydown(evt, index + 1)}
           />
         ))}
       </div>
