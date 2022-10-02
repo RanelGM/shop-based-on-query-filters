@@ -1,0 +1,16 @@
+.map {
+  height: 400px;
+}
+
+.popupContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+
+  p {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    column-gap: 10px;
+  }
+}

@@ -1,0 +1,22 @@
+@import "assets/styles/utils.scss";
+
+.cityList {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  column-gap: 10px;
+}
+
+@include viewport-mobile {
+  .cityList {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  .cityButton {
+    width: 100%;
+    max-width: 100%;
+  }
+}
