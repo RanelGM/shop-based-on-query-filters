@@ -99,14 +99,19 @@ export const Catalog = (props: CatalogProps) => {
               <Sort />
             )}
           </div>
-          <ul className={style.guitarsList}>
-            {guitars &&
-              guitars.map((guitar) => (
+
+          {guitars && guitars.length === 0 && <p>По заданным фильтрам не найдено подходящих гитар</p>}
+
+          {guitars && guitars.length > 0 && (
+            <ul className={style.guitarsList}>
+              {guitars.map((guitar) => (
                 <li key={guitar.id}>
                   <GuitarCard guitar={guitar} />
                 </li>
               ))}
-          </ul>
+            </ul>
+          )}
+
           <Pagination />
         </div>
       </section>

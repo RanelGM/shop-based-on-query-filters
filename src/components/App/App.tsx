@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useRoutes } from "react-router-dom";
 import { setViewport } from "store/ui/actions";
-import { getCurrentViewport } from "store/ui/selectors";
+import { getCurrentViewport, getError } from "store/ui/selectors";
 import { Footer } from "components/Common/Footer/Footer";
 import { Header } from "components/Common/Header/Header";
+import { ErrorModal } from "components/Modals/ErrorModal/ErrorModal";
 import { AboutScreen } from "components/PageScreens/AboutScreen/AboutScreen";
 import { CartScreen } from "components/PageScreens/CartScreen/CartScreen";
 import { CatalogScreen } from "components/PageScreens/CatalogScreen/CatalogScreen";
@@ -31,6 +32,7 @@ const AppRoutes = () => useRoutes(APP_ROUTES);
 
 const App = () => {
   const { currentViewport } = useSelector(getCurrentViewport);
+  const error = useSelector(getError);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -52,6 +54,7 @@ const App = () => {
 
   return (
     <div className={style.component}>
+      {error && <ErrorModal error={error} />}
       <Header />
       <main className={style.main}>
         <AppRoutes />

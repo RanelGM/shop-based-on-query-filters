@@ -13,3 +13,4 @@ export const getCurrentViewport = (state: RootReducerState) => {
 };
 
 export const getPaginationCount = (state: RootReducerState) => state.ui.paginationCount;
+export const getError = (state: RootReducerState) => state.ui.error;

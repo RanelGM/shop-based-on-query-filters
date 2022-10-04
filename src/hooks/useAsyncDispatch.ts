@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { AxiosError } from "axios";
 import { AppDispatch, AsyncActionResult } from "store/store";
+import { setError } from "store/ui/actions";
 
 type Status = {
   isLoading: boolean;
@@ -71,7 +73,11 @@ export const useAsyncDispatch = <T extends unknown[]>(props: Props<T>): Result<T
         if (onError) {
           // Опциональный параметр, вызывается при неуспешной загрузке, если передан
           onError(error);
+          return;
         }
+
+        // Если не передан, то по умолчанию открывается модальное окно с ошибкой
+        dispatch(setError(error as AxiosError));
       } finally {
         isFirstLoadRef.current = false;
       }

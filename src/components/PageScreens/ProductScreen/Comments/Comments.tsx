@@ -16,7 +16,7 @@ export const Comments = ({ comments }: CommentsProps) => {
   const [commentsCount, setCommentsCount] = useState<number>(COMMENTS_COUNT_STEP);
 
   const commentsToShow = useMemo(() => comments.slice(0, commentsCount), [comments, commentsCount]);
-  const isButtonMoreShow = commentsCount < comments.length;
+  const isButtonMoreShow = commentsToShow.length > 0 && commentsCount < comments.length;
 
   const modalCommentRef = useRef<HTMLDivElement | null>(null);
   const [isModalCommentOpen, modalCommentComments] = useModal({ componentRef: modalCommentRef, isClickCapture: true });
@@ -46,33 +46,37 @@ export const Comments = ({ comments }: CommentsProps) => {
         </div>
 
         <ul className={style.commentList}>
-          {commentsToShow.map((item) => {
-            const { id, userName, createAt, rating, advantage, disadvantage, comment } = item;
+          {commentsToShow.length === 0 ? (
+            <li className={style.commentItem}>Отзывов ещё нет, но вы можете стать первым!</li>
+          ) : (
+            commentsToShow.map((item) => {
+              const { id, userName, createAt, rating, advantage, disadvantage, comment } = item;
 
-            return (
-              <li key={id} className={style.commentItem}>
-                <div className={style.itemHeadingWrapper}>
-                  <h3>{userName}</h3>
-                  <p className={style.date}>{formatDate(createAt)}</p>
-                </div>
-                <RatingStars rating={rating} />
-                <div className={style.infoWrapper}>
-                  <div className={style.info}>
-                    <h3>Достоинства:</h3>
-                    <p>{advantage}</p>
+              return (
+                <li key={id} className={style.commentItem}>
+                  <div className={style.itemHeadingWrapper}>
+                    <h3>{userName}</h3>
+                    <p className={style.date}>{formatDate(createAt)}</p>
                   </div>
-                  <div className={style.info}>
-                    <h3>Недостатки:</h3>
-                    <p>{disadvantage}</p>
+                  <RatingStars rating={rating} />
+                  <div className={style.infoWrapper}>
+                    <div className={style.info}>
+                      <h3>Достоинства:</h3>
+                      <p>{advantage}</p>
+                    </div>
+                    <div className={style.info}>
+                      <h3>Недостатки:</h3>
+                      <p>{disadvantage}</p>
+                    </div>
+                    <div className={style.info}>
+                      <h3>Комментарий:</h3>
+                      <p>{comment}</p>
+                    </div>
                   </div>
-                  <div className={style.info}>
-                    <h3>Комментарий:</h3>
-                    <p>{comment}</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
+                </li>
+              );
+            })
+          )}
         </ul>
 
         {isButtonMoreShow && (
