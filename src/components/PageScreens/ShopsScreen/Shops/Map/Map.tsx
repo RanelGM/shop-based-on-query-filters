@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { Map as MapType } from "leaflet";
+import { Map as MapType, Tooltip } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { City, Shop } from "types/shop";
 import { Icon } from "components/Common/Icon/Icon";

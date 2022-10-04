@@ -1,0 +1,36 @@
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  left: 50%;
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 20px;
+  border-radius: 8px;
+  background: rgb(0 0 0 / 0.5);
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--white);
+}
+
+.swiper-button-next {
+  top: auto;
+  right: calc(50% - 65px);
+  bottom: 7px;
+
+  &::after {
+    content: url("../../../../assets/img/icons/next.svg");
+  }
+}
+
+.swiper-button-prev {
+  top: auto;
+  bottom: 7px;
+  left: calc(50% - 65px);
+
+  &::after {
+    content: url("../../../../assets/img/icons/prev.svg");
+  }
+}

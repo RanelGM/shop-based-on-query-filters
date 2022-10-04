@@ -6,6 +6,7 @@ import { setViewport } from "store/ui/actions";
 import { getCurrentViewport } from "store/ui/selectors";
 import { Footer } from "components/Common/Footer/Footer";
 import { Header } from "components/Common/Header/Header";
+import { AboutScreen } from "components/PageScreens/AboutScreen/AboutScreen";
 import { CartScreen } from "components/PageScreens/CartScreen/CartScreen";
 import { CatalogScreen } from "components/PageScreens/CatalogScreen/CatalogScreen";
 import { MainScreen } from "components/PageScreens/MainScreen/MainScreen";
@@ -22,6 +23,7 @@ const APP_ROUTES = [
   { path: `${AppRoute.Product}/:id`, element: <ProductScreen /> },
   { path: AppRoute.Cart, element: <CartScreen /> },
   { path: AppRoute.Shops, element: <ShopsScreen /> },
+  { path: AppRoute.About, element: <AboutScreen /> },
   { path: "*", element: <NotFoundScreen /> },
 ];
 
