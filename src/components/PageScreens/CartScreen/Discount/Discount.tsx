@@ -70,6 +70,7 @@ export const Discount = () => {
             id="discount"
             className={cn(style.inputWrapper, isDiscountActive && style["inputWrapper--success"])}
             placeholder="Введите промокод"
+            autoComplete="on"
             value={inputValue}
             message={discountMessage}
             onKeyDown={onEnterKeydown}
