@@ -126,16 +126,19 @@
 
 @include viewport-mobile {
   .navButton {
-    z-index: 1002;
     display: flex;
+
+    .component--open & {
+      // 1002 - для перекрытия leaflet/swiper
+      z-index: 1002;
+    }
   }
 
   .navigation {
     position: absolute;
     top: 0;
     left: 0;
-    // 1001 - для перекрытия leaflet/swiper
-    z-index: 1001;
+    z-index: 1;
     display: flex;
     width: 100%;
     height: 100vh;
@@ -147,6 +150,7 @@
     animation: disableBreakpointAnimation 100ms;
 
     .component--open & {
+      z-index: 1001;
       opacity: 1;
       visibility: visible;
     }
