@@ -12,7 +12,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 export const Input = (props: InputProps) => {
-  const { id, className, message, label, labelRequired, forwardRef, ...rest } = props;
+  const { id, className, message, label, labelRequired, forwardRef, autoComplete = "off", ...rest } = props;
 
   return (
     <div className={cn(style.component, className)}>
@@ -23,7 +23,7 @@ export const Input = (props: InputProps) => {
         </label>
       )}
 
-      <input id={id} className={style.input} {...rest} ref={forwardRef} />
+      <input id={id} className={style.input} autoComplete={autoComplete} {...rest} ref={forwardRef} />
 
       {message && <p className={style.message}>{message}</p>}
     </div>

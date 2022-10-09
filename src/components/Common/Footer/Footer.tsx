@@ -8,6 +8,10 @@ import logo from "assets/img/content/logo.svg";
 import style from "./Footer.module.scss";
 
 export const Footer = () => {
+  const onLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className={style.component}>
       <Positioner className={style.positioner}>
@@ -29,7 +33,7 @@ export const Footer = () => {
               <ul className={cn(style.list, style["list--links"])}>
                 {FOOTER_NAV_LINKS.map((link) => (
                   <li className={style.navItem} key={link.id}>
-                    <NavLink className={style.navLink} to={link.path}>
+                    <NavLink className={style.navLink} to={link.path} onClick={onLinkClick}>
                       {link.name}
                     </NavLink>
                   </li>

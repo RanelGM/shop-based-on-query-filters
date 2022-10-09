@@ -12,6 +12,11 @@
   line-height: 19px;
 }
 
+.stars {
+  display: flex;
+  align-items: center;
+}
+
 .required {
   position: absolute;
   margin-left: 5px;
